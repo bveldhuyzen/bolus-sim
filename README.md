@@ -197,9 +197,7 @@ Of the available bolus options, these are the calculations:
 
 On these bolus suggestions if_then will be applied according to user settings and entries.
 
-Please mind that bolus calculators that do not distinguish between meal IOB and correction IOB, are deprecated.
-
-edit: fixed the above in a single formula
+Please mind that bolus calculators that do not distinguish between meal IOB and correction IOB, are deprecated. Same goes for single formula methods.
 
 
 #
