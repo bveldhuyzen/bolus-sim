@@ -28,8 +28,8 @@ For linux terminals:
 1. Open linux terminal
 2. Obtain required packages by typing "sudo apt-get install calc perl git" (without the "") and hit enter
 3. Confirm the installation of the packages if required
-4. Obtain simulator by typing "git clone https://github.com/bveldhuyzen/bolus-sim_v107.git" (without the "") and hit enter
-5. Go to folder by typing "cd bolus-sim_v107" (without the "") and hit enter
+4. Obtain simulator by typing "git clone https://github.com/bveldhuyzen/bolus-sim.git" (without the "") and hit enter
+5. Go to folder by typing "cd bolus-sim" (without the "") and hit enter
 6. Type "bash bolus-sim" and hit enter
 
 
@@ -41,13 +41,13 @@ For tablets and smartphones:
 6. Select yes if prompted for confirmation during the update
 7. Obtain required packages by typing "pkg install calc perl git" (without the "") and hit enter
 8. Select yes if prompted for confirmations during the update
-9. Obtain script by typing "git clone https://github.com/bveldhuyzen/bolus-sim_v107.git" (without the "") and hit enter
-10. Go to script folder by typing "cd bolus-sim_v107" (without the "") and hit enter
+9. Obtain script by typing "git clone https://github.com/bveldhuyzen/bolus-sim.git" (without the "") and hit enter
+10. Go to script folder by typing "cd bolus-sim" (without the "") and hit enter
 11. Type "bash bolus-sim" (without the "") and hit enter
 
 After being installed on tablet via Termux:
 1. Open the Termux application
-2. Type "cd bolus-sim_v107" (without the "") and hit enter
+2. Type "cd bolus-sim" (without the "") and hit enter
 3. Type "bash bolus-sim" (without the "") and hit enter
 
 
