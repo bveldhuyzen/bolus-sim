@@ -8,7 +8,7 @@ v1.07
 - Allows for manual input of meal IOB and correction IOB
 - Optionally calculates your meal IOB and correction IOB (linear)
 - Includes calculations with every bolus suggestion
-- Runs on smartphone, tablet, laptop, pc, probably also raspberry and chromebook
+- Runs on tablets, laptops, pc's, smartphones, probably also raspberry and chromebook
 
 
 - Extended/wave/burst bolus function under construction (will include IOB adjustment)
