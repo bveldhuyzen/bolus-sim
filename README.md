@@ -10,6 +10,7 @@ v1.07
 - Includes calculations with every bolus suggestion
 - Runs on tablets, laptops, pc's, smartphones, probably also raspberry and chromebook
 
+#
 
 - Extended/wave/burst bolus function under construction (will include IOB adjustment)
 - Fully configurable, please request for additional options if missing*
