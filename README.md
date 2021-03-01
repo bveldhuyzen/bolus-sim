@@ -405,7 +405,7 @@ With a correction IOB of 6, while current BG = 4, the suggested meal bolus doesn
 
 Reversed correction can only provide for limited compensation here. The question also remains how the user ends up with such a dose of correction insulin still active while BG is almost near minimum treshold, way below target.
 
-
+Some insulin pumps include a warning system for these situations. There are even those that provide a counter-suggestion of carbohydrates. This function is already prepared in BASH and will be implemented somewhere Mar/Apr 2021 with some other improvements.
 
 #
 +1 if you read everything. 
