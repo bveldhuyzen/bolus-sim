@@ -410,5 +410,6 @@ Roadmap
 https://i.imgur.com/j7f6r5U.gifv
 
 
-
-end of trial period.
+#
+end of trial period,
+passed at 10 Mar 2021.
