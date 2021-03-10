@@ -56,7 +56,7 @@ The simulator (#bolus-sim) is small on purpose.
 The script will create everything that is required along the way and put it in a temporary folder.
 When running #bolus-sim in a linux terminal, or linux terminal emulator, the user will be prompted for entries.
 These entries correspond with the user entries and settings required for bolus calculations of $DEVICE.
-Optionally, the user may enter meal IOB and/or correction IOB, in order to further simulate one's situation.
+Optionally, the user may include meal IOB and/or correction IOB, in order to further simulate one's situation.
 A bolus calculation simulation will then run in the background,
 of which the most suitable option will be presented to the user.
 The script then removes the temporary folder.
