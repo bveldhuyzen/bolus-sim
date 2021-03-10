@@ -8,7 +8,7 @@ v1.07
 - Allows for manual input of meal IOB and correction IOB
 - Optionally calculates your meal IOB and correction IOB (linear)
 - Includes calculations with every bolus suggestion
-- Runs on tablets, laptops, pc's, smartphones, probably also raspberry and chromebook
+- Runs on tablets, laptops, pc's, smartphones, likely also on raspberry, watches, and chromebooks
 
 #
 
@@ -405,7 +405,9 @@ With a correction IOB of 6, while current BG = 4, the suggested meal bolus doesn
 
 Reversed correction can only provide for limited compensation here. The question also remains how the user ends up with such a dose of correction insulin still active while BG is almost near minimum treshold, way below target.
 
-Some insulin pumps include a warning system for these situations. There are even those that provide a counter-suggestion of carbohydrates. This function is already prepared in BASH and will be implemented around Apr 2021 along with some other tweaks.
+Some insulin pumps include a warning system for these situations. There are even those that provide a counter-suggestion of carbohydrates. This function is already prepared in BASH and will be implemented around Apr 2021 along with some other tweaks. 
+
+Edit: a separate simulator will be provided for future updates. Keeping this one as it is now, so that users of $DEVICE may continue using it as simulator of $DEVICE.
 
 #
 +1 if you read everything. 
@@ -414,3 +416,7 @@ Some insulin pumps include a warning system for these situations. There are even
 Roadmap
 -
 https://i.imgur.com/j7f6r5U.gifv
+
+
+
+end of trial period.
