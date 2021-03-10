@@ -12,14 +12,6 @@ v1.07
 
 #
 
-- Extended/wave/burst bolus function under construction (will include IOB adjustment)
-- Fully configurable, please request for additional options if missing*
-
-
-*if requesting a function or option that is currently available on a device of your knowing, please provide brand, type/model, iteration, and a series of user settings as defined in the system user guide. Or just provide system user guide.
-
-#
-
 #
 #Recommended to use only as simulation, e.g. for training and educational purposes
 #
