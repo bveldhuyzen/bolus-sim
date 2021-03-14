@@ -172,6 +172,7 @@ Of the available bolus options, these are the calculations:
 
     meal bolus + reversed correction:
     $MEALBOLUS - (($TARGETBG - $CURRENTBG) / $CORRECTIONFACTOR) = $MEALBOLUS_REVERSED
+    *in $DEVICE the reversed correction is calculated otherwise, but the result is the same, see $DEVICE system user guide
 
     correction bolus no iob entry:
     ($CURRENTBG - $TARGETBG) / $CORRECTIONFACTOR = $CORRECTIONBOLUS
