@@ -186,6 +186,8 @@ Of the available bolus options, these are the calculations:
     $CORRECTIONBOLUS - $CURRENTIOB_MEAL - $CURRENTIOB_CORRECTION = $CORRECTIONBOLUS_MINUS_IOB
     ($CURRENTCARB / $ICRATIO) - $leftover_CORRECTION_IOB = $MEALBOLUS_FINAL
     $CORRECTIONBOLUS_MINUS_IOB + $MEALBOLUS_FINAL = $FULLBOLUSCALC
+    
+edit: the rationale will be included a bit later in a more complete version of the user guide (you may already find it in the system user guide of $DEVICE).
 
 On these bolus suggestions if_then will be applied according to user settings and entries.
 
