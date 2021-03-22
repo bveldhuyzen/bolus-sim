@@ -95,7 +95,10 @@ If selecting yes (1) for IOB calculator, then #iob_calc.sh starts. The following
 #
 2. IOB calculation(s)
 
-The script (#iob_calc.sh) then calculates what part of your last meal and/or correction bolus is still active. It determines the amount of insulin that is still active based on your insulin duration. The method is linear. 
+The script (#iob_calc.sh) then calculates what part of your last meal and/or correction bolus is still active. It determines the amount of insulin that is still active based on your insulin duration. IOB is calculated as followed:
+
+    $last_meal_bolus - ($hours_ago_last_meal_bolus / $insulin_duration) * $last_meal_bolus = leftover_IOB_from_last_meal_bolus
+    $last_correction_bolus - ($hours_ago_last_correction_bolus / $insulin_duration) * $last_correction_bolus = leftover_IOB_from_last_correction_bolus
 
 Function is further under construction to accept different IOB profiles.
 
