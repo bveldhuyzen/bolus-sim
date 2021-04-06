@@ -216,7 +216,7 @@ Of the available bolus options, these are the calculations:
         $correctionbolusminusIOBmeal - $CURRENTIOB_CORRECTION = $correctionbolusminusIOB
 
         The meal bolus will be adjusted for IOB as followed:
-        if correction IOB > correction bolus, then
+        if correction IOB > (correction bolus - meal IOB), then
         $MEALBOLUS - IOB_leftover = $MEALBOLUS_FINAL       
         where $IOB_leftover = $CURRENTIOB_CORRECTION - $correctionbolusminusIOBmeal 
         else
