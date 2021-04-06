@@ -173,23 +173,71 @@ Please mind that clearing the cache involves a removal of all files in the temp 
 Of the available bolus options, these are the calculations:
 
     meal bolus:
-    $CURRENTCARB / $ICRATIO = $MEALBOLUS
+        $CURRENTCARB / $ICRATIO = $MEALBOLUS
 
     meal bolus + reversed correction:
-    $MEALBOLUS - (($TARGETBG - $CURRENTBG) / $CORRECTIONFACTOR) = $MEALBOLUS_REVERSED
-    *in $DEVICE the reversed correction is calculated otherwise, but the result is the same, see $DEVICE system user guide
+        $MEALBOLUS - (($TARGETBG - $CURRENTBG) / $CORRECTIONFACTOR) = $MEALBOLUS_REVERSED
+        *in $DEVICE the reversed correction is calculated otherwise, but the result is the same, see $DEVICE system user guide
 
     correction bolus no iob entry:
-    ($CURRENTBG - $TARGETBG) / $CORRECTIONFACTOR = $CORRECTIONBOLUS
+        ($CURRENTBG - $TARGETBG) / $CORRECTIONFACTOR = $CORRECTIONBOLUS
 
     correction bolus adjusted for iob entry:
-    $CORRECTIONBOLUS - $CURRENTIOB_MEAL - $CURRENTIOB_CORRECTION = $CORRECTIONBOLUS_MINUS_IOB
+        $CORRECTIONBOLUS - $CURRENTIOB_MEAL - $CURRENTIOB_CORRECTION = $CORRECTIONBOLUS_MINUS_IOB
 
     meal + correction bolus no iob entry:
-    $MEALBOLUS + $CORRECTIONBOLUS = $TOTALBOLUS
+        $MEALBOLUS + $CORRECTIONBOLUS = $TOTALBOLUS
 
     meal + correction bolus adjusted for iob entry:
-    $CORRECTIONBOLUS - $CURRENTIOB_MEAL - $CURRENTIOB_CORRECTION = $CORRECTIONBOLUS_MINUS_IOB
+    
+        Pending update: 
+        
+        This bolus is not a single formula, but a result of several. Giving it a try now.
+    
+        As first is determined that there is IOB
+        Second it is determinded there is need for a meal bolus and a need for a correction bolus
+        
+        The meal bolus is already calculated as followed:
+        $CURRENTCARB / $ICRATIO = $MEALBOLUS
+        
+        The correction bolus is already calculated as followed:
+        ($CURRENTBG - $TARGETBG) / $CORRECTIONFACTOR = $CORRECTIONBOLUS
+        
+        IOB is specified as followed:
+        - Correction IOB (from previous correction bolus)
+        - Meal IOB (from previous meal bolus)
+
+        The correction bolus will be adjusted for IOB as followed:
+        $CORRECTIONBOLUS - $CURRENTIOB_MEAL = $correctionbolusminusIOBmeal
+        if $correctionbolusminusIOBmeal < 0, then $correctionbolusminusIOBmeal = 0
+        if $correctionbolusminusIOBmeal < 0, then $correctionbolusminusIOBmeal = 0
+        if $correctionbolusminusIOBmeal < 0, then $CURRENTIOB_CORRECTION = $IOB_leftover
+        
+        if $correctionbolusminusIOBmeal is not less than zero, then
+        $correctionbolusminusIOBmeal - $CURRENTIOB_CORRECTION = $correctionbolusminusIOB
+
+        The meal bolus will be adjusted for IOB as followed:
+        if correction IOB > correction bolus, then
+        $MEALBOLUS - IOB_leftover = $MEALBOLUS_FINAL
+        where $IOB_leftover = $CURRENTIOB_CORRECTION - $correctionbolusminusIOBmeal 
+        else
+        $MEALBOLUS = $MEALBOLUS
+        
+        $CORRECTIONBOLUS - $CURRENTIOB_MEAL - $CURRENTIOB_CORRECTION = $CORRECTIONBOLUS_MINUS_IOB   
+        if $CORRECTIONBOLUS_MINUS_IOB < 0, then $CORRECTIONBOLUS_MINUS_IOB = 0
+        and
+        
+  
+        
+        The meal bolus will be adjusted for IOB as followed:
+        $MEALBOLUS - $IOB_leftover = $MEALBOLUS_FINAL
+    
+     
+        
+    
+    
+    
+    $CORRECTIONBOLUS - $CURRENTIOB_MEAL - $CURRENTIOB_CORRECTION = $CORRECTIONBOLUS_MINUS_IOB   
     ($CURRENTCARB / $ICRATIO) - $leftover_CORRECTION_IOB = $MEALBOLUS_FINAL
     $CORRECTIONBOLUS_MINUS_IOB + $MEALBOLUS_FINAL = $FULLBOLUSCALC
     
