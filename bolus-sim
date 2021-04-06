@@ -301,7 +301,7 @@ fi
 echo '****************************************************************************'
 echo ''
 
-
+#mistake found: CORRECTIONBOLUS10000 not in use (function seems to work though)
 #mealbolus - leftover correction IOB, when meal + correction bolus, while correction IOB > correction bolus
 if [[ $CURRENTIOB10000_CORRECTION -gt $CORRECTIONBOLUS10000 ]]
 then
