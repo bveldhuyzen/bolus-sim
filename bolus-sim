@@ -302,7 +302,8 @@ echo '**************************************************************************
 echo ''
 
 #mistake found: CORRECTIONBOLUS10000 not in use (function seems to work though)
-#mealbolus - leftover correction IOB, when meal + correction bolus, while correction IOB > correction bolus
+#will test this with #$correctionbolusminusIOB_10000
+#mealbolus - leftover correction IOB, when meal + correction bolus, while correction IOB > (correction bolus - meal IOB)
 if [[ $CURRENTIOB10000_CORRECTION -gt $CORRECTIONBOLUS10000 ]]
 then
 calc -d "$MEALBOLUS - $IOB_leftover" > mealbolusminusIOB_1.txt
