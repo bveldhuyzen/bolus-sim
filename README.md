@@ -211,7 +211,6 @@ Of the available bolus options, these are the calculations:
         $CORRECTIONBOLUS - $CURRENTIOB_MEAL = $correctionbolusminusIOBmeal
         if $correctionbolusminusIOBmeal < 0, then $correctionbolusminusIOBmeal = 0
         if $correctionbolusminusIOBmeal < 0, then $correctionbolusminusIOBmeal = 0
-        if $correctionbolusminusIOBmeal < 0, then $CURRENTIOB_CORRECTION = $IOB_leftover
         
         if $correctionbolusminusIOBmeal is not less than zero, then
         $correctionbolusminusIOBmeal - $CURRENTIOB_CORRECTION = $correctionbolusminusIOB
@@ -221,25 +220,13 @@ Of the available bolus options, these are the calculations:
         $MEALBOLUS - IOB_leftover = $MEALBOLUS_FINAL
         where $IOB_leftover = $CURRENTIOB_CORRECTION - $correctionbolusminusIOBmeal 
         else
-        $MEALBOLUS = $MEALBOLUS
+        $MEALBOLUS = $MEALBOLUS_FINAL
+       
+        The full bolus suggestion adjusted for IOB will then be:
+        $correctionbolusminusIOB + $mealbolus_final = $FULLBOLUSCALC
         
-        $CORRECTIONBOLUS - $CURRENTIOB_MEAL - $CURRENTIOB_CORRECTION = $CORRECTIONBOLUS_MINUS_IOB   
-        if $CORRECTIONBOLUS_MINUS_IOB < 0, then $CORRECTIONBOLUS_MINUS_IOB = 0
-        and
+        Still checking..
         
-  
-        
-        The meal bolus will be adjusted for IOB as followed:
-        $MEALBOLUS - $IOB_leftover = $MEALBOLUS_FINAL
-    
-     
-        
-    
-    
-    
-    $CORRECTIONBOLUS - $CURRENTIOB_MEAL - $CURRENTIOB_CORRECTION = $CORRECTIONBOLUS_MINUS_IOB   
-    ($CURRENTCARB / $ICRATIO) - $leftover_CORRECTION_IOB = $MEALBOLUS_FINAL
-    $CORRECTIONBOLUS_MINUS_IOB + $MEALBOLUS_FINAL = $FULLBOLUSCALC
     
 edit: the rationale will be included a bit later in a more complete version of the user guide (you may already find it in the system user guide of $DEVICE).
 
