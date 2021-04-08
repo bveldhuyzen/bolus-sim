@@ -235,8 +235,6 @@ edit: the rationale will be included a bit later in a more complete version of t
 
 On these bolus suggestions if_then will be applied according to user settings and entries.
 
-Please mind that bolus calculators that do not distinguish between meal IOB and correction IOB, or use no similar method to track ongoing carbohydrate bolus activity, are deprecated. Same goes for single formula methods.
-
 
 #
 7. Determining what bolus suggestion is suitable for the situation of the user
