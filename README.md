@@ -162,7 +162,7 @@ The following status entries are requested from the user:
 
 Whether you use a dot (e.g. 6.25) or a comma (e.g. 6,25 ) for a setting or entry; no problem, the dot and the comma are one and the same here.
 
-Whether you use mmol/L or mg/dL for a setting or entry; no problem, this is of no relevance to the calculations (your bolus suggestion will remain the same)
+Whether you use mmol/L or mg/dL on your device; no problem, this is of no relevance to the calculations (your bolus suggestion will remain the same)
 
 For each user entry a separate text file is generated (or more). View the code of #bolus-sim to see what variable relates to what text file. All these separate files are then merged again into a yoursettings.txt file, which will be printed on the screen.
 
