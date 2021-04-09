@@ -454,7 +454,7 @@ For example, the simulator can almost always be used for a meal bolus, but that 
 
 With a correction IOB of 6, while current BG = 4, the suggested meal bolus doesn't further add to a decrease of BG, but it does not improve the situation either. In this situation, preferably, one takes into account the 6 units = 6 * 2.3 = ~13.8 further decrease in BG, and maybe waits with administering additional insulin until situation is stabilized. 
 
-Reversed correction can only provide for limited compensation here. The question also remains how the user ends up with such a dose of correction insulin still active while BG is almost near minimum treshold, way below target.
+Even when used, reversed correction would only be able to provide for limited compensation here. The question also remains how the user ends up with such a dose of correction insulin still active while BG is almost near minimum treshold, way below target.
 
 Some insulin pumps include a warning system for these situations. There are even those that provide a counter-suggestion of carbohydrates. This function is already prepared in BASH and will be implemented around Apr 2021 along with some other tweaks. 
 
