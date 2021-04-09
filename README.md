@@ -239,7 +239,7 @@ Of the available bolus options, these are the calculations:
         
           
         The final bolus suggestion for a meal + correction bolus adjusted for IOB will then be:
-        if $correctionbolusminusIOB < 0, then$correctionbolusminusIOB = 0
+        if $correctionbolusminusIOB < 0, then $correctionbolusminusIOB = 0
         if $MEALBOLUS_FINAL < 0, then $MEALBOLUS_FINAL = 0
         $correctionbolusminusIOB + $mealbolus_final = $FULLBOLUSCALC
         
