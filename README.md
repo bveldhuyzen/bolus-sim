@@ -114,32 +114,44 @@ Visual presentation of IOB calculations
 
 This section uses the #read parameter to ask for user input. It accepts at least up to two decimals for input, but most likely more (because of the calc app). Please mind that eventually it will prompt errors if you go crazy with the decimals.
 
+Please consult your healthcare provider for all settings.
+
 The following entries are requested from the user:
 
     Target BG
+        desired target level of blood glucose
         can be set at any number except negatives
-    Minimum BG (for calculator to be active)
+    Minimum BG
+        required minimum level of blood glucose for bolus calculator to be active
         can be set at any number except negatives
-    Correct above (BG)
+    Correct above BG
+        provide correction bolus suggestion when blood glucose level is above
         can be set at any number except negatives
-    IC ratio (how many carbohydrates are processed per one unit of insulin)
+    IC ratio (insulin-to-carbohydrate ratio)
+        how many carbohydrates are processed per one unit of insulin
         can be set at any number except negatives
-    Correction factor (how much does your blood glucose decrease per one unit of insulin)
+    Correction factor
+        how much does your blood glucose level decrease per one unit of insulin
         can be set at any number except negatives
-    Reverse correction (adjusts a meal bolus when current BG is lower than target BG)
+    Reverse correction
+        adjusts a meal bolus when current BG is lower than target BG (see $DEVICE manual)
         use 1 for on, use 0 for off
 
     Current BG
+        your current blood glucose level
         can be set at any number except negatives
         set as target BG, if no current BG
-    Current carbohydrate consumption (in grams)
+    Current carbohydrate consumption (in gram)
+        your intake of carbohydrates in gram
         can be set at any number except negatives
         set as 0 if no current carbohydrate consumption
-    Current correction IOB (the volume of currently active units of insulin from a previous correction bolus)
+    Current correction IOB
+        the amount of currently active units of insulin from a previous correction bolus
         can be set at any number except negatives
         set at 0 for no correction IOB
         because IOB calculations cause a lot of people headaches, the IOB calculator can be used for this
-    Current meal IOB (the amount of currently active units of insulin from a previous meal bolus)
+    Current meal IOB 
+        the amount of currently active units of insulin from a previous meal bolus
         can be set at any number except negatives
         set at 0 for no meal IOB
         idem: because IOB calculations cause a lot of people headaches, the IOB calculator can be used for this
