@@ -116,7 +116,7 @@ This section uses the #read parameter to ask for user input. It accepts at least
 
 Please consult your healthcare provider for all settings.
 
-The following entries are requested from the user:
+The following settings are requested from the user:
 
     Target BG
         desired target level of blood glucose
@@ -136,6 +136,9 @@ The following entries are requested from the user:
     Reverse correction
         adjusts a meal bolus when current BG is lower than target BG (see $DEVICE manual)
         use 1 for on, use 0 for off
+
+
+The following status entries are requested from the user:
 
     Current BG
         your current blood glucose level
