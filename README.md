@@ -224,9 +224,8 @@ Of the available bolus options, these are the calculations:
 
         The correction bolus will be adjusted for IOB as followed:
         $CORRECTIONBOLUS - $CURRENTIOB_MEAL = $correctionbolusminusIOBmeal
-        if $correctionbolusminusIOBmeal < 0, then $correctionbolusminusIOBmeal = 0
-        if $correctionbolusminusIOBmeal < 0, then $correctionbolusminusIOB = 0
-        
+        if $correctionbolusminusIOBmeal < 0, then $correctionbolusminusIOBmeal = 0 && $correctionbolusminusIOB = 0
+                
         if $correctionbolusminusIOBmeal is not less than zero, then
         $correctionbolusminusIOBmeal - $CURRENTIOB_CORRECTION = $correctionbolusminusIOB
 
@@ -237,13 +236,12 @@ Of the available bolus options, these are the calculations:
         else
         $MEALBOLUS = $MEALBOLUS_FINAL
         
-          
         The final bolus suggestion for a meal + correction bolus adjusted for IOB will then be:
         if $correctionbolusminusIOB < 0, then $correctionbolusminusIOB = 0
         if $MEALBOLUS_FINAL < 0, then $MEALBOLUS_FINAL = 0
         $correctionbolusminusIOB + $mealbolus_final = $FULLBOLUSCALC
         
-        Still checking..
+        ...
         
     
 edit: the rationale will be included a bit later in a more complete version of the user guide (you may already find it in the system user guide of $DEVICE).
