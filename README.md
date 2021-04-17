@@ -199,6 +199,7 @@ Of the available bolus options, these are the calculations:
 
     correction bolus adjusted for iob entry:
         $CORRECTIONBOLUS - $CURRENTIOB_MEAL - $CURRENTIOB_CORRECTION = $CORRECTIONBOLUS_MINUS_IOB
+        if $CORRECTIONBOLUS_MINUS_IOB < 0, then $CORRECTIONBOLUS_MINUS_IOB = 0
 
     meal + correction bolus no iob entry:
         $MEALBOLUS + $CORRECTIONBOLUS = $TOTALBOLUS
