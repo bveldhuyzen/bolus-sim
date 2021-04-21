@@ -465,7 +465,7 @@ Edit: a separate simulator will be provided for future updates. Keeping this one
 
 Roadmap
 -
-https://i.imgur.com/j7f6r5U.gifv
+https://github.com/bveldhuyzen/bolus-sim-shadow-clone/
 
 
 #
