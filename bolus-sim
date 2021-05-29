@@ -246,6 +246,11 @@ sed -e 's/^[\t]*//' correctionbolus_space.txt > correctionbolus_posneg.txt
 awk '$1<0 {$1=0} 1' correctionbolus_posneg.txt > correctionbolus_test.txt
 CORRECTIONBOLUS=$(<correctionbolus_test.txt)
 
+#testing for if_then
+calc -d "$CORRECTIONBOLUS * 100000000000000000000" > correctionbolus_10000.txt
+CORRECTIONBOLUS10000=$(<correctionbolus_10000.txt)
+####rounding errors?
+
 
 #CORRECTION BOLUS RECALCULATED FOR IOB ENTRIES step 1; correction bolus minus meal IOB
 calc -d "$CORRECTIONBOLUS - $CURRENTIOB_MEAL" > correctionbolusminusIOBmeal.txt
@@ -306,7 +311,18 @@ echo ''
 #mealbolus - leftover correction IOB, when meal + correction bolus, while correction IOB > (correction bolus - meal IOB)
 #seems to work fine with $correctionbolusminusIOB_10000
 #94k testrun this weekend
-if [[ $CURRENTIOB10000_CORRECTION -gt $correctionbolusminusIOB_10000 ]]
+#if [[ $CURRENTIOB10000_CORRECTION -gt $correctionbolusminusIOB_10000 ]]
+#then
+#calc -d "$MEALBOLUS - $IOB_leftover" > mealbolusminusIOB_1.txt
+#awk '$1<0 {$1=0} 1' mealbolusminusIOB_1.txt > mealbolusminusIOB.txt
+#sed -e 's/^[\t]*//' mealbolusminusIOB.txt > mealbolus_final.txt
+#mealbolus_final=$(<mealbolus_final.txt)
+#else
+#head -1 mealbolus.txt > mealbolus_final.txt
+#mealbolus_final=$(<mealbolus_final.txt)
+#fi
+
+if [[ $CURRENTIOB10000_CORRECTION -gt "$CORRECTIONBOLUS10000" ]]
 then
 calc -d "$MEALBOLUS - $IOB_leftover" > mealbolusminusIOB_1.txt
 awk '$1<0 {$1=0} 1' mealbolusminusIOB_1.txt > mealbolusminusIOB.txt
@@ -316,6 +332,7 @@ else
 head -1 mealbolus.txt > mealbolus_final.txt
 mealbolus_final=$(<mealbolus_final.txt)
 fi
+
 
 
 #visual presentation
