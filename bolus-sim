@@ -18,7 +18,7 @@ cp iob_calc.sh temp_data_sim
 cd temp_data_sim
 
 #to multiply all settings by 100000 (was previously 10000)
-echo '1000000000' > 10000.txt
+echo '100000000000000000000' > 10000.txt
 TENTHOUSAND=$(<10000.txt)
 
 #if reversed correction is on ("1"), then it matches this file content
