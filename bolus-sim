@@ -1,5 +1,5 @@
 #!/bin/bash
-#v1.08
+#v1.07
 #
 #
 echo '*************************************************************************************'
@@ -18,7 +18,7 @@ cp iob_calc.sh temp_data_sim
 cp upgrade.sh temp_data_sim
 cd temp_data_sim
 
-#to multiply all settings by 100000 (was previously 10000)
+#to multiply all settings and remove the decimals (for if_then)
 echo '100000000000000000000' > 10000.txt
 TENTHOUSAND=$(<10000.txt)
 
