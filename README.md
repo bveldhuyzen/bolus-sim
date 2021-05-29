@@ -5,7 +5,7 @@ v1.07
 - Stand-alone bolus calculator simulator
 - Works interactive 
 - Accepts $DEVICE settings
-- Allows for manual input of meal IOB and correction IOB
+- Allows for manual input of meal IOB and correction IOB (currently debugging)
 - Optionally calculates your meal IOB and correction IOB (linear)
 - Includes calculations with every bolus suggestion
 - Runs on tablets, laptops, pc's, smartphones, likely also on raspberry, watches, and chromebooks
