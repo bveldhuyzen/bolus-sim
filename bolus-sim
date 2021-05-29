@@ -269,7 +269,7 @@ correctionbolusminusIOB=$(<correctionbolusminusIOB_10000.txt)
 
 
 #only for if_then
-calc -d "$correctionbolusminusIOB * $TENTHOUSAND" > correctionbolusminusIOB_10000_posneg.txt
+calc -d "$correctionbolusminusIOB * 100000000000000000000" > correctionbolusminusIOB_10000_posneg.txt
 awk '$1<0 {$1=0} 1' correctionbolusminusIOB_10000_posneg.txt > correctionbolusminusIOB_10000_space.txt
 sed -e 's/^[\t]*//' correctionbolusminusIOB_10000_space.txt > correctionbolusminusIOB_10000.txt
 correctionbolusminusIOB_10000=$(<correctionbolusminusIOB_10000.txt)
