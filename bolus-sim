@@ -1,5 +1,5 @@
 #!/bin/bash
-#v1.07
+#v1.08
 #
 #
 echo '*************************************************************************************'
@@ -15,6 +15,7 @@ bash -c '[ -d temp_data_sim ] && rm -rf temp_data_sim'
 #create new temp dir and cd to dir
 mkdir 'temp_data_sim'
 cp iob_calc.sh temp_data_sim
+cp upgrade.sh temp_data_sim
 cd temp_data_sim
 
 #to multiply all settings by 100000 (was previously 10000)
@@ -246,10 +247,11 @@ sed -e 's/^[\t]*//' correctionbolus_space.txt > correctionbolus_posneg.txt
 awk '$1<0 {$1=0} 1' correctionbolus_posneg.txt > correctionbolus_test.txt
 CORRECTIONBOLUS=$(<correctionbolus_test.txt)
 
-#testing for if_then
-calc -d "$CORRECTIONBOLUS * 100000000000000000000" > correctionbolus_10000.txt
+#for if_then
+calc -d "$CORRECTIONBOLUS * $TENTHOUSAND" > correctionbolus_10000.txt
 CORRECTIONBOLUS10000=$(<correctionbolus_10000.txt)
-####rounding errors?
+####rounding errors
+
 
 
 #CORRECTION BOLUS RECALCULATED FOR IOB ENTRIES step 1; correction bolus minus meal IOB
@@ -269,7 +271,7 @@ correctionbolusminusIOB=$(<correctionbolusminusIOB_10000.txt)
 
 
 #only for if_then
-calc -d "$correctionbolusminusIOB * 100000000000000000000" > correctionbolusminusIOB_10000_posneg.txt
+calc -d "$correctionbolusminusIOB * $TENTHOUSAND" > correctionbolusminusIOB_10000_posneg.txt
 awk '$1<0 {$1=0} 1' correctionbolusminusIOB_10000_posneg.txt > correctionbolusminusIOB_10000_space.txt
 sed -e 's/^[\t]*//' correctionbolusminusIOB_10000_space.txt > correctionbolusminusIOB_10000.txt
 correctionbolusminusIOB_10000=$(<correctionbolusminusIOB_10000.txt)
@@ -311,17 +313,6 @@ echo ''
 #mealbolus - leftover correction IOB, when meal + correction bolus, while correction IOB > (correction bolus - meal IOB)
 #seems to work fine with $correctionbolusminusIOB_10000
 #94k testrun this weekend
-#if [[ $CURRENTIOB10000_CORRECTION -gt $correctionbolusminusIOB_10000 ]]
-#then
-#calc -d "$MEALBOLUS - $IOB_leftover" > mealbolusminusIOB_1.txt
-#awk '$1<0 {$1=0} 1' mealbolusminusIOB_1.txt > mealbolusminusIOB.txt
-#sed -e 's/^[\t]*//' mealbolusminusIOB.txt > mealbolus_final.txt
-#mealbolus_final=$(<mealbolus_final.txt)
-#else
-#head -1 mealbolus.txt > mealbolus_final.txt
-#mealbolus_final=$(<mealbolus_final.txt)
-#fi
-
 if [[ $CURRENTIOB10000_CORRECTION -gt "$CORRECTIONBOLUS10000" ]]
 then
 calc -d "$MEALBOLUS - $IOB_leftover" > mealbolusminusIOB_1.txt
@@ -332,7 +323,6 @@ else
 head -1 mealbolus.txt > mealbolus_final.txt
 mealbolus_final=$(<mealbolus_final.txt)
 fi
-
 
 
 #visual presentation
@@ -354,7 +344,10 @@ echo 'MEAL BOLUS' >> mealbolus_report.txt
 echo "$CURRENTCARB / $ICRATIO = $MEALBOLUS" >> mealbolus_report.txt
 echo '' >> mealbolus_report.txt
 echo 'TOTAL BOLUS SUGGESTION' >> mealbolus_report.txt
-echo "$MEALBOLUS units of insulin" >> mealbolus_report.txt
+echo "$MEALBOLUS" > full_number_1.txt
+bash upgrade.sh
+MEALBOLUS_X=$(<rounded_bolus_calc.txt)
+echo "$MEALBOLUS_X units of insulin" >> mealbolus_report.txt
 echo '' >> mealbolus_report.txt
 cat mealbolus_report.txt
 echo 'Available' > no_mealbolus.txt
@@ -382,7 +375,10 @@ echo 'MEAL BOLUS reversed correction' >> reversedmealbolus_report.txt
 echo "$MEALBOLUS - (($TARGETBG - $CURRENTBG) / $CORRECTIONFACTOR) = $MEALBOLUSREVERSED" >> reversedmealbolus_report.txt
 echo '' >> reversedmealbolus_report.txt
 echo 'TOTAL BOLUS SUGGESTION' >> reversedmealbolus_report.txt
-echo "$MEALBOLUSREVERSED units of insulin" >> reversedmealbolus_report.txt
+echo "$MEALBOLUSREVERSED" > full_number_1.txt
+bash upgrade.sh
+MEALBOLUSREVERSED_X=$(<rounded_bolus_calc.txt)
+echo "$MEALBOLUSREVERSED_X units of insulin" >> reversedmealbolus_report.txt
 echo '' >> reversedmealbolus_report.txt
 cat reversedmealbolus_report.txt
 echo 'Available' > no_meal_reversed_correction_bolus.txt
@@ -407,7 +403,10 @@ echo 'CORRECTION BOLUS' >> correctionbolus_report.txt
 echo "($CURRENTBG - $TARGETBG) / $CORRECTIONFACTOR = $CORRECTIONBOLUS" >> correctionbolus_report.txt
 echo '' >> correctionbolus_report.txt
 echo 'TOTAL BOLUS SUGGESTION' >> correctionbolus_report.txt
-echo "$CORRECTIONBOLUS units of insulin" >> correctionbolus_report.txt
+echo "$CORRECTIONBOLUS" > full_number_1.txt
+bash upgrade.sh
+CORRECTIONBOLUS_X=$(<rounded_bolus_calc.txt)
+echo "$CORRECTIONBOLUS_X units of insulin" >> correctionbolus_report.txt
 echo '' >> correctionbolus_report.txt
 cat correctionbolus_report.txt
 echo 'Available' > no_correction_bolus.txt
@@ -436,6 +435,7 @@ echo 'CORRECTION BOLUS adjusted for IOB' >> correctionbolus_IOB_report.txt
 echo "$CORRECTIONBOLUS - $CURRENTIOB_MEAL - $CURRENTIOB_CORRECTION = $correctionbolusminusIOB" >> correctionbolus_IOB_report.txt
 echo '' >> correctionbolus_IOB_report.txt
 echo 'TOTAL BOLUS SUGGESTION' >> correctionbolus_IOB_report.txt
+
 echo "$correctionbolusminusIOB units of insulin" >> correctionbolus_IOB_report.txt
 echo '' >> correctionbolus_IOB_report.txt
 cat correctionbolus_IOB_report.txt
