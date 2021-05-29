@@ -17,8 +17,8 @@ mkdir 'temp_data_sim'
 cp iob_calc.sh temp_data_sim
 cd temp_data_sim
 
-#to multiply all settings by 100000 (was previously 10000)
-echo '100000000000000000000' > 10000.txt
+#to multiply all settings by 100000000000000000000 (was previously 10000)
+echo '10000' > 10000.txt
 TENTHOUSAND=$(<10000.txt)
 
 #if reversed correction is on ("1"), then it matches this file content
@@ -223,15 +223,15 @@ MEALBOLUS=$(<mealbolus.txt)
 
 #REVERSED CORRECTION MEAL BOLUS step 1; output is the difference between current BG and target BG'
 calc -d "$CURRENTBG - $TARGETBG" > tempfile1_space.txt
-sed -e 's/^[\t]*//' tempfile1_space.txt > tempfile1.txt
-#tr -d \- < tempfile1_negative.txt > tempfile1.txt
+sed -e 's/^[\t]*//' tempfile1_space.txt > tempfile1_negative.txt
+tr -d \- < tempfile1_negative.txt > tempfile1.txt
 REVERSEDKLOOF=$(<tempfile1.txt)
 #REVERSED CORRECTION MEAL BOLUS step 2; output is the BG to reverse correct for (output from step 1), divided by the correction factor, which results in the amount of insulin to be deducted from the meal bolus
 calc -d "$REVERSEDKLOOF / $CORRECTIONFACTOR" > tempfile2.txt
 #tr -d \~ < tempfile2_1.txt > tempfile2.txt
 REVERSEDKLOOF10000=$(<tempfile2.txt)
 #REVERSED CORRECTION MEAL BOLUS step 3; meal bolus minus the output of step 2
-calc -d "$REVERSEDKLOOF10000 + $MEALBOLUS" > mealbolus_reversed.txt
+calc -d "$MEALBOLUS - $REVERSEDKLOOF10000" > mealbolus_reversed.txt
 awk '$1<0 {$1=0} 1' mealbolus_reversed.txt > tempfile3_space.txt
 sed -e 's/^[\t]*//' tempfile3_space.txt > tempfile3.txt
 MEALBOLUSREVERSED=$(<tempfile3.txt)
@@ -270,10 +270,16 @@ correctionbolusminusIOB=$(<correctionbolusminusIOB_10000.txt)
 
 
 #only for if_then
+calc -d "$correctionbolusminusIOBmeal * $TENTHOUSAND" > correctionbolusminusIOBmeal_10000_posneg.txt
+awk '$1<0 {$1=0} 1' correctionbolusminusIOBmeal_10000_posneg.txt > correctionbolusminusIOBmeal_10000_space.txt
+sed -e 's/^[\t]*//' correctionbolusminusIOBmeal_10000_space.txt > correctionbolusminusIOBmeal_10000.txt
+correctionbolusminusIOBmeal_10000=$(<correctionbolusminusIOBmeal_10000.txt)
+
+#only for if_then
 calc -d "$correctionbolusminusIOB * $TENTHOUSAND" > correctionbolusminusIOB_10000_posneg.txt
 awk '$1<0 {$1=0} 1' correctionbolusminusIOB_10000_posneg.txt > correctionbolusminusIOB_10000_space.txt
 sed -e 's/^[\t]*//' correctionbolusminusIOB_10000_space.txt > correctionbolusminusIOB_10000.txt
-correctionbolusminusIOB_10000=$(<correctionbolusminusIOB_10000.txt)
+correctionbolusminusIOB_10000=$(<correctionbolusminusIOBmeal_10000.txt)
 
 
 #MEAL BOLUS AND CORRECTION BOLUS (NO IOB)'
@@ -307,9 +313,13 @@ fi
 echo '****************************************************************************'
 echo ''
 
-
-#mealbolus - leftover correction IOB, when meal + correction bolus, while correction IOB > correction bolus
-if [[ $CURRENTIOB10000_CORRECTION -gt $CORRECTIONBOLUS10000 ]]
+#mistake found: CORRECTIONBOLUS10000 not in use (function seems to work though)
+#will test this with #$correctionbolusminusIOB_10000
+#mealbolus - leftover correction IOB, when meal + correction bolus, while correction IOB > (correction bolus - meal IOB)
+#seems to work fine with $correctionbolusminusIOB_10000
+#94k testrun this weekend
+#
+if [[ "$CURRENTIOB10000_CORRECTION -gt $correctionbolusminusIOBmeal_10000" ]]
 then
 calc -d "$MEALBOLUS - $IOB_leftover" > mealbolusminusIOB_1.txt
 awk '$1<0 {$1=0} 1' mealbolusminusIOB_1.txt > mealbolusminusIOB.txt
@@ -405,7 +415,7 @@ echo '______________________________________________________________________'
 
 
 echo 'CORRECTION BOLUS recalculated for IOB'
-if [[ $CURRENTBG10000 -gt $TARGETBG10000 ]] && [[ $CURRENTCARB10000 -eq 0 ]] && [[ $TOTALIOB10000_if -gt 0 ]] && [[ $CURRENTBG10000 -ge $MINBG10000 ]] && [[ $correctionbolusminusIOB_10000 -gt 0 ]] && [[ $CURRENTBG10000 -gt $CORRECT_ABOVE_BG10000 ]]
+if [[ $CURRENTBG10000 -gt $TARGETBG10000 ]] && [[ $CURRENTCARB10000 -eq 0 ]] && [[ $TOTALIOB10000_if -gt 0 ]] && [[ $CURRENTBG10000 -ge $MINBG10000 ]] && [[ "$correctionbolusminusIOB_10000 -gt 0" ]] && [[ $CURRENTBG10000 -gt $CORRECT_ABOVE_BG10000 ]]
 then
 echo ''
 cat yoursettings.txt > correctionbolus_IOB_report.txt
@@ -557,4 +567,4 @@ read -p 'check your calculations, then hit enter to clear cache'
 cd -
 rm -rf temp_data_sim
 
-#V_v
+#V
