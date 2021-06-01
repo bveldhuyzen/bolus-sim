@@ -191,7 +191,7 @@ Of the available bolus options, these are the calculations:
         $CURRENTCARB / $ICRATIO = $MEALBOLUS
 
     meal bolus + reversed correction:
-        $MEALBOLUS - (($TARGETBG - $CURRENTBG) / $CORRECTIONFACTOR) = $MEALBOLUS_REVERSED
+        $MEALBOLUS - (($CURRENTBG - $TARGETBG) / $CORRECTIONFACTOR) = $MEALBOLUS_REVERSED
         *in $DEVICE the reversed correction is calculated otherwise, but the result is the same, see $DEVICE system user guide
 
     correction bolus no iob entry:
