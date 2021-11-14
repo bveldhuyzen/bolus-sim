@@ -14,6 +14,7 @@ if [[ $PREFERENCE -eq 1 ]] && [[ $DEVICE_SELECTION -eq 1 ]]; then bash bolus-sim
 if [[ $PREFERENCE -eq 2 ]] && [[ $DEVICE_SELECTION -eq 1 ]]; then bash bolus-sim-device1-test; fi
 
 echo 'test'
+rm PREFERENCE.txt
 echo 'done'
 
 #V
