@@ -3,11 +3,11 @@ BASH Bolus Calculator Simulator Multitool for insulin pumps with bolus calculato
 
 The simulator is interactive and allows to select for simulation of the insulin bolus calculations of the following devices:
 
-- $DEVICE1 - Testing
-- $DEVICE2 - Testing
-- $DEVICE3 - Testing
+- $DEVICE1 - Testing (demo operational)
+- $DEVICE2 - Testing (demo operational)
+- $DEVICE3 - Testing (demo operational)
 
-- $DEVICE4 - Testing
+- $DEVICE4 - Testing (demo pending)
 - $DEVICE5 - Bolus calculator specifications in the user guide are either incomplete or incorrect
 
 - $DEVICE6 - Bolus calculator specifications in the user guide are either incomplete or incorrect
