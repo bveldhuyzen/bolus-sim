@@ -1,9 +1,9 @@
 #!/bin/bash
 #v1.091
-#Stand-alone bolus calculator simulator for $DEVICE1
+#Stand-alone bolus calculator simulator for $DEVICE1 - high accuracy mode
 #
-#
-#
+#https://www.boluscalculators.com
+#2021
 #
 echo '*************************************************************************************'
 echo ''
