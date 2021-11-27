@@ -6,8 +6,8 @@
 #
 #main menu script; choose your preference
 
-echo "If preference is running the simulator with a rounding module, choose option 1, select $DEVICE, and select rounding module"
-echo "If preference is not to apply rounding to the simulator's calculations, choose option 2, and select $DEVICE"
+echo "If preference is running the simulator with a rounding module, choose option 1, select DEVICE, and select rounding module"
+echo "If preference is not to apply rounding to the simulator's calculations, choose option 2, and select DEVICE"
 echo ''
 read PREFERENCE
 echo "$PREFERENCE" > PREFERENCE.txt
