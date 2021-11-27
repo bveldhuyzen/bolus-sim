@@ -35,7 +35,7 @@ if [[ $DEVICE_SELECTION -eq 7 ]] && [[ $PREFERENCE -eq 2 ]]; then bash bolus-sim
 if [[ $DEVICE_SELECTION -eq 8 ]] && [[ $PREFERENCE -eq 2 ]]; then bash bolus-sim-device8-calc; fi
 if [[ $DEVICE_SELECTION -eq 9 ]] && [[ $PREFERENCE -eq 2 ]]; then bash bolus-sim-device9-calc; fi
 if [[ $DEVICE_SELECTION -eq 10 ]] && [[ $PREFERENCE -eq 2 ]]; then bash bolus-sim-device10-calc; fi
-if [[ ; fi
+# 
 
 echo 'test'
 rm PREFERENCE.txt
