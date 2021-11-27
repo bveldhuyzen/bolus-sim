@@ -22,6 +22,8 @@ The simulator is interactive and allows to select for simulation of the insulin 
 #
 If you are a user of one of the devices ($DEVICE) 5 to 10, then please contact the manufacturer of the device, and consult your healthcare provider. The bolus calculator function is not adequately specified. It cannot be confirmed if the device works as intended by the manufacturer. 
 
+
+#
 Please mind that with this app come no guarantees. Validation before use is highly recommended.
 
 
