@@ -1,5 +1,9 @@
 !#bin/bash
-#Main menu script; choose your preference
+#https://www.boluscalculators.com
+#info [at] boluscalculators dot com
+#2021
+
+#main menu script; choose your preference
 
 echo "If preference is running the simulator with a rounding module, choose option 1, and select rounding module"
 echo "If preference is not to apply rounding to the simulator's calculations, choose option 2"
