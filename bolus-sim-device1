@@ -70,7 +70,7 @@ round_to_this_decimal_floor=$(<round_to_this_decimal_floor_entry_1.txt)
 if [[ $round_to_this_decimal_floor -eq 1 ]]
 then
 echo 'rounding down all intermediate and final bolus calculations to nearest (multiple of) 0.001'
-echo '0.001' > round_to_this_decimal_floor_selection_1.txt
+echo '0.000000001' > round_to_this_decimal_floor_selection_1.txt
 round_to_this_decimal_floor_selection=$(<round_to_this_decimal_floor_selection_1.txt)
 fi
 
