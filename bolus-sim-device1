@@ -18,7 +18,7 @@ bash -c '[ -d temp_data_sim ] && rm -rf temp_data_sim'
 
 #create new temp dir and cp and cd to dir
 mkdir 'temp_data_sim'
-cp iob_calc.sh bolus-sim-device1-test temp_data_sim
+cp iob_calc.sh temp_data_sim
 cd temp_data_sim
 
 #to add a lot of zeroes to remove the decimal used at the user entries 
