@@ -14,6 +14,17 @@ echo "$PREFERENCE" > PREFERENCE.txt
 
 DEVICE_SELECTION=1
 
+#1. DEVICE1
+#2. DEVICE2
+#3. DEVICE3
+#4. DEVICE4
+#5. DEVICE5
+#6. DEVICE6
+#7. DEVICE7
+#8. DEVICE8
+#9. DEVICE9
+#10. DEVICE10
+
 if [[ $DEVICE_SELECTION -eq 1 ]] && [[ $PREFERENCE -eq 1 ]]; then bash bolus-sim-device1; fi
 if [[ $DEVICE_SELECTION -eq 2 ]] && [[ $PREFERENCE -eq 1 ]]; then bash bolus-sim-device2; fi
 if [[ $DEVICE_SELECTION -eq 3 ]] && [[ $PREFERENCE -eq 1 ]]; then bash bolus-sim-device3; fi
