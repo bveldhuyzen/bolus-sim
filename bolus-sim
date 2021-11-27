@@ -13,8 +13,27 @@ echo "$PREFERENCE" > PREFERENCE.txt
 
 DEVICE_SELECTION=1
 
-if [[ $PREFERENCE -eq 1 ]] && [[ $DEVICE_SELECTION -eq 1 ]]; then bash bolus-sim-device1; fi
+If [[ $DEVICE_SELECTION -eq 1 ]] && [[ $PREFERENCE -eq 1 ]]; then bash bolus-sim-device1; fi
+If [[ $DEVICE_SELECTION -eq 2 ]] && [[ $PREFERENCE -eq 1 ]]; then bash bolus-sim-device2; fi
+If [[ $DEVICE_SELECTION -eq 3 ]] && [[ $PREFERENCE -eq 1 ]]; then bash bolus-sim-device3; fi
+If [[ $DEVICE_SELECTION -eq 4 ]] && [[ $PREFERENCE -eq 1 ]]; then bash bolus-sim-device4; fi
+If [[ $DEVICE_SELECTION -eq 5 ]] && [[ $PREFERENCE -eq 1 ]]; then bash bolus-sim-device5; fi
+If [[ $DEVICE_SELECTION -eq 6 ]] && [[ $PREFERENCE -eq 1 ]]; then bash bolus-sim-device6; fi
+If [[ $DEVICE_SELECTION -eq 7 ]] && [[ $PREFERENCE -eq 1 ]]; then bash bolus-sim-device7; fi
+If [[ $DEVICE_SELECTION -eq 8 ]] && [[ $PREFERENCE -eq 1 ]]; then bash bolus-sim-device8; fi
+If [[ $DEVICE_SELECTION -eq 9 ]] && [[ $PREFERENCE -eq 1 ]]; then bash bolus-sim-device9; fi
+If [[ $DEVICE_SELECTION -eq 10 ]] && [[ $PREFERENCE -eq 1 ]]; then bash bolus-sim-device10; fi
 
+If [[ $DEVICE_SELECTION -eq 1 ]] && [[ $PREFERENCE -eq 2 ]]; then bash bolus-sim-device1-calc; fi
+If [[ $DEVICE_SELECTION -eq 2 ]] && [[ $PREFERENCE -eq 2 ]]; then bash bolus-sim-device2-calc; fi
+If [[ $DEVICE_SELECTION -eq 3 ]] && [[ $PREFERENCE -eq 2 ]]; then bash bolus-sim-device3-calc; fi
+If [[ $DEVICE_SELECTION -eq 4 ]] && [[ $PREFERENCE -eq 2 ]]; then bash bolus-sim-device4-calc; fi
+If [[ $DEVICE_SELECTION -eq 5 ]] && [[ $PREFERENCE -eq 2 ]]; then bash bolus-sim-device5-calc; fi
+If [[ $DEVICE_SELECTION -eq 6 ]] && [[ $PREFERENCE -eq 2 ]]; then bash bolus-sim-device6-calc; fi
+If [[ $DEVICE_SELECTION -eq 7 ]] && [[ $PREFERENCE -eq 2 ]]; then bash bolus-sim-device7-calc; fi
+If [[ $DEVICE_SELECTION -eq 8 ]] && [[ $PREFERENCE -eq 2 ]]; then bash bolus-sim-device8-calc; fi
+If [[ $DEVICE_SELECTION -eq 9 ]] && [[ $PREFERENCE -eq 2 ]]; then bash bolus-sim-device9-calc; fi
+If [[ $DEVICE_SELECTION -eq 10 ]] && [[ $PREFERENCE -eq 2]]; then bash bolus-sim-device10-calc; fi
 if [[ $PREFERENCE -eq 2 ]] && [[ $DEVICE_SELECTION -eq 1 ]]; then bash bolus-sim-device1-test; fi
 
 echo 'test'
