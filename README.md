@@ -45,7 +45,7 @@ For linux terminals:
 For tablets and smartphones:
 1. Intall Termux (application) from appstore on your smartphone or tablet
 3. Open Termux application
-4. Smaller screens have to be flipped horoizontal for optimal experience
+4. Smaller screens have to be flipped horizontal for optimal experience
 5. Update the app by typing "pkg update" (without the "") and hit enter
 6. Select yes if prompted for confirmation during the update
 7. Obtain required packages by typing "pkg install calc perl git" (without the "") and hit enter
