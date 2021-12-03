@@ -69,7 +69,7 @@ After that, gl
 
 #
 # Notes
-Due to inadequate specification of the bolus calculator function in the user guide of devices 5 to 10, this app will be released (as preliminary) for the devices which come with complete specifications in the user guide.
+Due to inadequate specification of the bolus calculator function in the user guides of devices 5 to 10, this app will be released (as preliminary) for the devices that come with complete specifications in the user guide. 
 
 #
 # Change log
@@ -86,3 +86,4 @@ Upcoming:
 - Update of installation guide to provide for a more detailed instruction on how to install and run on various systems (e.g. it probably also runs in Windows via WSL)
 - Reorganizing and streamlining of code
 - Release of validation procedures for all simulators
+- Release of made notifications and/or recommendations (incl. timestamps) to manufacturers of devices 5 to 10 in regard to the inadequate specifications of the bolus calculator function in the user guide.
