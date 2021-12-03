@@ -81,10 +81,12 @@ Upcoming:
 - Release of testrun data for the simulator of $DEVICE4
 - Possibly a demo of the simulators of $DEVICE5 and $DEVICE6 (depending on the manufacturers)
 - If so, then also testruns for the simulators of $DEVICE5 and $DEVICE6
-- Looping mode for all simulators
-- User guide for all simulators
+- Release of looping mode for all simulators (for validation purposes)
+- Release of used testing profiles for looping modes (for validation purposes)
+- Release of validation procedures for all simulators
+- User guide for all simulators pending
 - Update of installation guide to provide for a more detailed instruction on how to install and run on various systems (e.g. it probably also runs in Windows via WSL)
 - Reorganizing and streamlining of code
-- Release of validation procedures for all simulators
 - Release of made notifications and/or recommendations (incl. timestamps) to manufacturers of devices 5 to 10 in regard to the inadequate specifications of the bolus calculator function in the user guide.
+- Release of device-diff-module to determine accuracy of rounded bolus suggestions (compared to raw)
 - Boluscalculators.com
