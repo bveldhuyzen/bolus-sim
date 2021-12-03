@@ -1,4 +1,4 @@
-# bolus-sim-multitool
+# bolus-sim-multitool - demo
 BASH Bolus Calculator Simulator Multitool for insulin pumps with bolus calculator available in The Netherlands. Accepts $DEVICE user settings and status entries. Utilizes the C-style arbitrary precicion calculator app to simulate the bolus calculations of selected device. For educational purposes only.
 
 The simulator works interactive and allows for simulation of the bolus calculations of the following devices:
@@ -29,10 +29,41 @@ Please mind that with this app come no guarantees. Validation before use is high
 #
 Please report errors, bugs, malfunctions, etc. to: repository [ at ] boluscalculators dot com
 
+#
+
+#
+#IMPORTANT: ALWAYS RUN SIMULATOR FROM ITS OWN FOLDER
+
+For linux terminals:
+1. Open linux terminal
+2. Obtain required packages by typing "sudo apt-get install calc perl git" (without the "") and hit enter
+3. Confirm the installation of the packages if required
+4. Obtain simulator by typing "git clone https://github.com/bveldhuyzen/bolus-sim-multitool.git" (without the "") and hit enter
+5. Go to folder by typing "cd bolus-sim-multitool" (without the "") and hit enter
+6. Type "bash bolus-sim" and hit enter
 
 
+For tablets
+1. Intall Termux (application) from appstore on your smartphone or tablet
+3. Open Termux application
+4. Smaller screens have to be flipped horoizontal for optimal experience
+5. Update the app by typing "pkg update" (without the "") and hit enter
+6. Select yes if prompted for confirmation during the update
+7. Obtain required packages by typing "pkg install calc perl git" (without the "") and hit enter
+8. Select yes if prompted for confirmations during the update
+9. Obtain script by typing "git clone https://github.com/bveldhuyzen/bolus-sim-multitool.git" (without the "") and hit enter
+10. Go to script folder by typing "cd bolus-sim-multitool" (without the "") and hit enter
+11. Type "bash bolus-sim" (without the "") and hit enter
+
+After being installed on tablet via Termux:
+1. Open the Termux application
+2. Type "cd bolus-sim-multitool" (without the "") and hit enter
+3. Type "bash bolus-sim" (without the "") and hit enter
 
 
+After that, gl
+#
 
 
-
+SIMULATOR USER GUIDE (under construction):
+-
