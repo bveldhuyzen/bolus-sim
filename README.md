@@ -27,7 +27,9 @@ If you are a user of one of the devices ($DEVICE) 5 to 10, then please contact t
 Please mind that with this app come no guarantees. Validation before use is highly recommended. 
 
 #
-Please report errors, bugs, malfunctions, etc. to: repository [ at ] boluscalculators dot com
+Please report errors, bugs, malfunctions, complaints, etc. to: repository [ at ] boluscalculators dot com
+
+Also for suggestions
 
 #
 # Installation guide
