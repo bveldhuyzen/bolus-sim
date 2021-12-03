@@ -43,7 +43,7 @@ For linux terminals:
 6. Type "bash bolus-sim" and hit enter
 
 
-For tablets
+For tablets and smartphones:
 1. Intall Termux (application) from appstore on your smartphone or tablet
 3. Open Termux application
 4. Smaller screens have to be flipped horoizontal for optimal experience
