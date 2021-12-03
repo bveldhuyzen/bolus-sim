@@ -210,7 +210,7 @@ read -p 'Confirm entries, then hit enter'
 #the lines below print each of the user settings to a separate text file
 echo '____________________________________________________________'
 echo 'BASH Bolus Calculator Simulator'
-echo 'v1.09'
+echo 'v1.091'
 echo '...'
 echo ''
 perl -lne 'print "$1" if /Target BG: (.*)/' yoursettings.txt > setting1.txt
