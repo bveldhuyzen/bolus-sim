@@ -29,8 +29,9 @@ Please mind that with this app come no guarantees. Validation before use is high
 #
 Please report errors, bugs, malfunctions, etc. to: repository [ at ] boluscalculators dot com
 
+#
 # Installation guide
-#IMPORTANT: ALWAYS RUN SIMULATOR FROM ITS OWN FOLDER
+IMPORTANT: ALWAYS RUN SIMULATOR FROM ITS OWN FOLDER
 
 For linux terminals:
 1. Open linux terminal
