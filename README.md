@@ -84,3 +84,5 @@ Upcoming:
 - Looping mode for all simulators
 - User guide for all simulators
 - Update of installation guide to provide for a more detailed instruction on how to install and run on various systems (e.g. it probably also runs in Windows via WSL)
+- Reorganizing and streamlining of code
+- Release of validation procedures for all simulators
