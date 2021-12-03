@@ -87,3 +87,4 @@ Upcoming:
 - Reorganizing and streamlining of code
 - Release of validation procedures for all simulators
 - Release of made notifications and/or recommendations (incl. timestamps) to manufacturers of devices 5 to 10 in regard to the inadequate specifications of the bolus calculator function in the user guide.
+- Boluscalculators.com
