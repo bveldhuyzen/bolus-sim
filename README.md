@@ -61,8 +61,16 @@ After being installed on tablet or smartphone via Termux:
 
 
 After that, gl
+
+
 #
-
-
-SIMULATOR USER GUIDE (under construction):
+# SIMULATOR USER GUIDE (under construction):
 -
+
+#
+# NOTES
+Due to inadequate specification of the bolus calculator function in the user guide of devices 5 to 10, this app will be released (as preliminary) for the devices which come with complete specifications in the user guide.
+
+#
+# Change log
+
