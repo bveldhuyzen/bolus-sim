@@ -55,7 +55,7 @@ For tablets and smartphones:
 10. Go to script folder by typing "cd bolus-sim-multitool" (without the "") and hit enter
 11. Type "bash bolus-sim" (without the "") and hit enter
 
-After being installed on tablet via Termux:
+After being installed on tablet or smartphone via Termux:
 1. Open the Termux application
 2. Type "cd bolus-sim-multitool" (without the "") and hit enter
 3. Type "bash bolus-sim" (without the "") and hit enter
