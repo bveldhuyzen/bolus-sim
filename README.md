@@ -74,3 +74,13 @@ Due to inadequate specification of the bolus calculator function in the user gui
 #
 # Change log
 
+Upcoming:
+
+- Release of testrun data for the simulator of $DEVICE1, $DEVICE2, $DEVICE3 
+- Release of the (demo/preliminary) simulator for $DEVICE4
+- Release of testrun data for the simulator of $DEVICE4
+- Possibly a demo of the simulators of $DEVICE5 and $DEVICE6 (depending on the manufacturer)
+- If so, then also testruns for the simulators of $DEVICE5 and $DEVICE6
+- Looping mode for all simulators
+- User guide for all simulators
+- Update of installation guide to provide a more detailed instruction on how to install and run on various systems (e.g. it probably also runs in Windows via WSL)
