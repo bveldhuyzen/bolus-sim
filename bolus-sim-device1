@@ -108,9 +108,6 @@ echo 'rounding down all intermediate and final bolus calculations to nearest (mu
 echo '0.20' > round_to_this_decimal_floor_selection_6.txt
 round_to_this_decimal_floor_selection=$(<round_to_this_decimal_floor_selection_6.txt)
 fi
-
-
-
 echo '______________________________________________________________________'
 
 echo 'Target BG:'
@@ -396,10 +393,6 @@ sed -e 's/^[\t]*//' tempfile3_space.txt > tempfile3.txt
 CORRECTIONBOLUSREVERSED=$(<tempfile3.txt)
 
 
-
-
-
-
 #REVERSED CORRECTION MEAL BOLUS adjusted for correction IOB; 
 calc -d "$MEALBOLUS - $CURRENTIOB_CORRECTION" > mealbolus_minusIOBcorrection_space.txt
 sed -e 's/^[\t]*//' mealbolus_minusIOBcorrection_space.txt > mealbolus_minusIOBcorrection_posneg.txt
@@ -433,14 +426,6 @@ NEW_DECIMALS_7=$(<new_decimals_7.txt)
 calc -d "$INTEGER_7 + $NEW_DECIMALS_7" > reversedcorrectionmealbolus_IOB_pos_space.txt
 sed -e 's/^[\t]*//' reversedcorrectionmealbolus_IOB_pos_space.txt > reversedcorrectionmealbolus_IOB_pos.txt
 CORRECTIONBOLUSREVERSED_IOB=$(<reversedcorrectionmealbolus_IOB_pos.txt)
-
-
-
-
-
-
-
-
 
 
 #CORRECTION BOLUS step 1; output is the difference between current BG and target BG
@@ -699,7 +684,6 @@ CURRENTIOBCORRECTION_GT_ZERO=$(<currentiobcorrection_is_positive_for_if_then.txt
 
 
 #for correction bolus minus IOB if_then
-
 awk '$1>0 {$1=1} 1' correctionbolusminusIOB.txt > correctionbolusminusiob_is_positive_for_if_then.txt
 CORRECTIONBOLUSMINUSIOB_GT_ZERO=$(<correctionbolusminusiob_is_positive_for_if_then.txt)
 
@@ -797,10 +781,6 @@ fi
 echo '______________________________________________________________________'
 
 
-
-
-
-
 echo 'MEAL BOLUS + reversed correction adjusted for IOB'
 if [[ $CURRENTCARB_GT_ZERO -eq 1 ]] && [[ $CURRENTBG_GE_MINBG -eq 1 ]] && [[ $CURRENTBG_LT_TARGETBG -eq 1 ]] && [[ $REVERSEDCORRECTION_EQ_ONE -eq 1 ]] && [[ $TOTALIOB_GT_ZERO -eq 1 ]]
 then
@@ -827,10 +807,6 @@ echo 'Unavailable'
 echo 'Unavailable' > no_meal_reversed_correction_bolus_iob.txt
 fi
 echo '______________________________________________________________________'
-
-
-
-
 
 
 echo 'CORRECTION BOLUS no IOB entry'
