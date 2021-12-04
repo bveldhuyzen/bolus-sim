@@ -6,7 +6,7 @@ The simulator works interactive and allows for simulation of the bolus calculati
 
 - $DEVICE1 - Testing (demo operational)
 - $DEVICE2 - Testing (demo operational)
-- $DEVICE3 - Testing (demo operational)
+- $DEVICE3 - Testing (demo operational (might be scrapped))
 
 - $DEVICE4 - Testing (demo pending)
 - $DEVICE5 - Bolus calculator specifications in the user guide are either incomplete or incorrect
