@@ -71,7 +71,7 @@ Due to inadequate specification of the bolus calculator function in the user gui
 
 - For $DEVICE5 the term "active insulin" is a numerical value that is not fully specified in the user guide. It is unknown what calculations lead to this numerical value. For bolus suggestions including active insulin, it cannot be confirmed if this bolus suggestion is calculated as intended.
 
-- For $DEVICE6, $DEVICE7, $DEVICE8, a complete specification for the so called [software] is available in the user guide, but due to a misformulation in an image of an used formula, the current specification may lead to misinterpretation due to there being more than one possible way of functioning.
+- For $DEVICE6, $DEVICE7, $DEVICE8, a complete specification for the so called [software] is available in the user guide, but due to a misformulation in an image of a specific formula, the current specification may lead to misinterpretation due to there being more than one possible way of functioning.
 
 - For $DEVICE9 there are no specifications of the bolus calculations to be found in the user guide.
 
