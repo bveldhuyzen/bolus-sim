@@ -89,6 +89,6 @@ Upcoming:
 - User guide for all simulators pending
 - Update of installation guide to provide for a more detailed instruction on how to install and run on various systems (e.g. it probably also runs in Windows via WSL)
 - Reorganizing and streamlining of code
-- Release of made notifications and/or recommendations (incl. timestamps) to manufacturers of devices 5 to 10 in regard to the inadequate specifications of the bolus calculator function in the user guide.
+- Maybe release of made notifications and/or recommendations (incl. timestamps) to manufacturers of devices 5 to 10 in regard to the inadequate specifications of the bolus calculator function in the user guide.
 - Release of device-diff-module to determine accuracy of rounded bolus suggestions (compared to raw)
 - Boluscalculators.com
