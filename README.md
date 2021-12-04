@@ -19,10 +19,6 @@ The simulator works interactive and allows for simulation of the bolus calculati
 
 - $DEVICE10 - Bolus calculator specifications in the user guide are either incomplete or incorrect
 
-
-#
-If you are a user of one of the devices ($DEVICE) 5 to 10, then please contact the manufacturer of your device. The bolus calculator function is not adequately specified in the user guide. It cannot be confirmed if this function works as intended. 
-
 #
 Please mind that with this simulator come no guarantees. Validation before use is highly recommended. 
 
