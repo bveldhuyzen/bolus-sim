@@ -91,3 +91,8 @@ Upcoming:
 - Maybe release of made notifications and/or recommendations (incl. timestamps) to manufacturers of devices 5 to 10 in regard to the inadequate specifications of the bolus calculator function in the user guide.
 - Release of device-diff-module to determine accuracy of rounded bolus suggestions (compared to raw)
 - Boluscalculators.com
+
+
+#10 Dec 2021
+Simulator of DEVICE3 might be scrapped, since it is almost not used anymore. The user guide is also hard to find.
+Simulator of DEVICE5 (UK) was added to provide some competition, but unfortunately the user guide does not specify a term (value) in regard to the bolus calculations. Of bolus calculations that include this value it cannot be confirmed if the calculations are performed as intended.
