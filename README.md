@@ -94,6 +94,6 @@ Upcoming:
 
 
 #
-10 Dec 2021
-Simulator of DEVICE3 might be scrapped, since it is almost not used anymore. The user guide is also hard to find.
-Simulator of DEVICE5 (UK) was added to provide some competition, but unfortunately the user guide does not specify a term (value) in regard to the bolus calculations. Of bolus calculations that include this value it cannot be confirmed if the calculations are performed as intended.
+10 Dec 2021:
+- Simulator of DEVICE3 might be scrapped, since it is almost not used anymore. The user guide is also hard to find.
+- Simulator of DEVICE5 (UK) was added to provide some competition, but unfortunately the user guide does not specify a term (value) in regard to the bolus calculations. Of bolus calculations that include this value it cannot be confirmed if the calculations are performed as intended.
