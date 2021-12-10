@@ -1,6 +1,6 @@
 # bolus-sim-multitool - demo/preliminary
 
-BASH Bolus Calculator Simulator Multitool for insulin pumps with bolus calculator available in The Netherlands. Accepts $DEVICE user settings and status entries. Utilizes the C-style arbitrary precicion calculator app to simulate the bolus calculations of selected device. For educational purposes only.
+BASH Bolus Calculator Simulator Multitool for insulin pumps with bolus calculator available in The Netherlands and The United Kingdom. Accepts $DEVICE user settings and status entries. Utilizes the C-style arbitrary precicion calculator app to simulate the bolus calculations of selected device. For educational purposes only.
 
 The simulator works interactive and allows for simulation of the bolus calculations of the following devices:
 
@@ -97,3 +97,4 @@ Upcoming:
 10 Dec 2021:
 - Simulator of DEVICE3 might be scrapped, since it is almost not used anymore.
 - Simulator of DEVICE5 (UK) was added to provide some competition, but unfortunately the user guide does not specify a term (value) in regard to the bolus calculations. Of bolus calculations that include this value it cannot be confirmed if the calculations are performed as intended.
+- Added United Kingdom to description.
