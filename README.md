@@ -95,6 +95,8 @@ Upcoming:
 
 #
 10 Dec 2021:
-- Simulator of DEVICE3 might be scrapped, since it is almost not used anymore.
-- Simulator of DEVICE5 (UK) was added to provide some competition, but unfortunately the user guide does not specify a term (value) in regard to the bolus calculations. Of bolus calculations that include this value it cannot be confirmed if the calculations are performed as intended.
+- Simulator of $DEVICE3 might be scrapped, since it is almost not used anymore.
+- Simulator of $DEVICE5 (UK) was added to provide some competition, but unfortunately the user guide does not specify a term (value) in regard to the bolus calculations. Of bolus calculations that include this value it cannot be confirmed if the calculations are performed as intended.
 - Added United Kingdom to description.
+- Updated simulator user guide for $DEVICE1 and $DEVICE2 near completion.
+- Simulator user guide for $DEVICE4 in progress.
