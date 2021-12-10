@@ -56,7 +56,7 @@ fi
 echo ''
 echo 'Set rounding down of bolus calculations'
 echo ''
-echo 'type 1 to set rounding down bolus calculations to 0.000000001'
+echo 'type 1 to set rounding down bolus calculations to 0.0001'
 echo 'type 2 to set rounding down bolus calculations to 0.001'
 echo 'type 3 to set rounding down bolus calculations to 0.01'
 echo 'type 4 to set rounding down bolus calculations to 0.05'
@@ -69,8 +69,8 @@ round_to_this_decimal_floor=$(<round_to_this_decimal_floor_entry_1.txt)
 
 if [[ $round_to_this_decimal_floor -eq 1 ]]
 then
-echo 'rounding down all intermediate and final bolus calculations to nearest (multiple of) 0.000000001'
-echo '0.000000001' > round_to_this_decimal_floor_selection_1.txt
+echo 'rounding down all intermediate and final bolus calculations to nearest (multiple of) 0.0001'
+echo '0.0001' > round_to_this_decimal_floor_selection_1.txt
 round_to_this_decimal_floor_selection=$(<round_to_this_decimal_floor_selection_1.txt)
 fi
 
