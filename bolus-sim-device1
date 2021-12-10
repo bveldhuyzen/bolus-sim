@@ -110,7 +110,7 @@ round_to_this_decimal_floor_selection=$(<round_to_this_decimal_floor_selection_6
 fi
 echo '______________________________________________________________________'
 
-echo 'Please note: if rounding-module is active, insulin-on-board is always rounded up to the nearest (multiple of) 0.05'
+echo 'Please mind: if rounding-module is active, insulin-on-board is always rounded up to the nearest (multiple of) 0.05'
 echo ''
 
 echo 'Target BG:'
