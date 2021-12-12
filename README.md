@@ -65,6 +65,10 @@ For mac computer systems:
 4. Close terminal and open again to verify used shell via #ps -p $$ (or #echo $0)
 5. Run instalation as described for linux terminals.
 
+For (some) smart watches:
+1. Enable/force your WiFi connection
+2. Run installation as described for smartphones and tablets
+
 
 After that, gl
 
@@ -112,4 +116,5 @@ Upcoming:
 #
 12 Dec 2021
 - Added mac to the installation guide
+- Added smart watch to the installation guide
 - WSL is next
