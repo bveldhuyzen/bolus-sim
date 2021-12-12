@@ -58,8 +58,15 @@ After being installed on tablet or smartphone via Termux:
 3. Type "bash bolus-sim" (without the "") and hit enter
 
 
-After that, gl
+For mac computer systems:
+1. The bash shell might have to be set as default, depending on the age of your system.
+2. View the available shells in terminal via #cat /etc/shells
+3. Set bash as default via #chsh -s /bin/bash
+4. Close terminal and open again to verify used shell via #ps -p $$ (or #echo $0)
+5. Run instalation as described for linux terminals.
 
+
+After that, gl
 
 #
 # User guide (under construction):
@@ -100,3 +107,9 @@ Upcoming:
 - Added United Kingdom to description.
 - The updated simulator user guides for $DEVICE1 and $DEVICE2 are nearing completion.
 - Simulator user guide for $DEVICE4 in progress.
+
+
+#
+12 Dec 2021
+- Added mac to the installation guide
+- WSL is next
