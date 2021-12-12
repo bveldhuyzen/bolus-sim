@@ -31,7 +31,7 @@ Also for suggestions
 # Installation guide
 IMPORTANT: ALWAYS RUN SIMULATOR FROM ITS OWN FOLDER
 
-For linux terminals:
+For linux:
 1. Open linux terminal
 2. Obtain required packages by typing "sudo apt-get install calc perl git" (without the "") and hit enter
 3. Confirm the installation of the packages if required
