@@ -69,9 +69,9 @@ For mac computer systems:
 #
 For (some) smart watches:
 1. Enable/force your WiFi connection
-2. Run installation as described for smartphones and tablets
+2. Run installation as described for smartphones and tablets.
 
-.
+..
 
 After that, gl
 
