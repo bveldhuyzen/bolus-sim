@@ -81,6 +81,8 @@ After that, gl
 
 #
 # Notes
+Every (step of) significance is logged into a temporary text file for validation purposes.
+
 To be further specified.
 
 #
