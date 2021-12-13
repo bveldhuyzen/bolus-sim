@@ -58,7 +58,7 @@ After being installed on tablet or smartphone via Termux:
 2. Type "cd bolus-sim" (without the "") and hit enter
 3. Type "bash bolus-sim" (without the "") and hit enter
 
-
+#
 For mac computer systems:
 1. The bash shell might have to be set as default, depending on the age of your system.
 2. View the available shells in terminal via #cat /etc/shells
@@ -66,11 +66,13 @@ For mac computer systems:
 4. Close terminal and open again to verify used shell via #ps -p $$ (or #echo $0)
 5. Run instalation as described for linux terminals.
 
+#
 For (some) smart watches:
 1. Enable/force your WiFi connection
 2. Run installation as described for smartphones and tablets
 
 .
+
 After that, gl
 
 #
