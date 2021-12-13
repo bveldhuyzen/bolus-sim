@@ -25,12 +25,13 @@ Please mind that with this simulator come no guarantees. Validation before use i
 #
 Please report errors, bugs, malfunctions, complaints, etc. to: repository [ at ] boluscalculators dot com
 
-Also for suggestions
+Also for suggestions.
 
 #
 # Installation guide
 IMPORTANT: ALWAYS RUN SIMULATOR FROM ITS OWN FOLDER
 
+#
 For linux:
 1. Open linux terminal
 2. Obtain required packages by typing "sudo apt-get install calc perl git" (without the "") and hit enter
@@ -39,7 +40,7 @@ For linux:
 5. Go to folder by typing "cd bolus-sim" (without the "") and hit enter
 6. Type "bash bolus-sim" and hit enter
 
-
+#
 For tablets and smartphones:
 1. Intall Termux (application) from appstore on your smartphone or tablet
 3. Open Termux application
@@ -69,7 +70,7 @@ For (some) smart watches:
 1. Enable/force your WiFi connection
 2. Run installation as described for smartphones and tablets
 
-
+.
 After that, gl
 
 #
