@@ -81,7 +81,6 @@ After that, gl
 
 #
 # Notes
-
 To be further specified.
 
 #
