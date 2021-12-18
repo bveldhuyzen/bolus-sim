@@ -6,6 +6,7 @@
 #info [at] boluscalculators dot com
 #2021
 #
+
 echo '*************************************************************************************'
 echo ''
 echo 'BASH Bolus Calculator Simulator - interactive mode'
