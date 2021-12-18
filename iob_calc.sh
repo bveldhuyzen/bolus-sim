@@ -1,4 +1,5 @@
 #!/bin/bash
+#v1.01
 #lightweight IOB calculator
 #
 #https://www.boluscalculators.com
@@ -127,3 +128,6 @@ echo "You have a meal IOB of $last_meal_bolus_iob_1 units of insulin"
 echo '&&'
 echo "You have a correction IOB of $last_correction_bolus_iob_1 units of insulin"
 echo '*************************************************************************************'
+
+
+#V
