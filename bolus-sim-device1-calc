@@ -8,7 +8,7 @@
 #
 echo '*************************************************************************************'
 echo ''
-echo 'BASH Bolus Calculator Simulator - interactive mode'
+echo 'BASH Bolus Calculator Simulator - $DEVICE1 - interactive mode'
 echo '...'
 echo '*************************************************************************************'
 echo ''
