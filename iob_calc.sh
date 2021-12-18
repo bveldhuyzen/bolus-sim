@@ -2,9 +2,10 @@
 #lightweight IOB calculator
 #
 #https://www.boluscalculators.com
-#info [at] boluscalculators dot com
+#repository [at] boluscalculators dot com
 #2021
 #
+
 echo ''
 echo '**** IOB calculator ****'
 echo ''
