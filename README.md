@@ -7,17 +7,18 @@ The simulator works interactive and allows for simulation of the bolus calculati
 - $DEVICE1 - Testing (demo operational)
 - $DEVICE2 - Testing (demo operational)
 - $DEVICE3 - Testing (demo operational (might be scrapped))
+- $DEVICE4 - Testing (demo operational)
 
-- $DEVICE4 - Testing (demo pending)
-- $DEVICE5 - Bolus calculator specifications in the user guide are either incomplete or incorrect
-
+- $DEVICE5 - Testing (demo pending)
 - $DEVICE6 - Bolus calculator specifications in the user guide are either incomplete or incorrect
+
 - $DEVICE7 - Bolus calculator specifications in the user guide are either incomplete or incorrect
 - $DEVICE8 - Bolus calculator specifications in the user guide are either incomplete or incorrect
-
 - $DEVICE9 - Bolus calculator specifications in the user guide are either incomplete or incorrect
 
 - $DEVICE10 - Bolus calculator specifications in the user guide are either incomplete or incorrect
+
+- $DEVICE11 - Bolus calculator specifications in the user guide are either incomplete or incorrect
 
 #
 Please mind that with this simulator come no guarantees. Validation before use is highly recommended. 
@@ -119,3 +120,7 @@ Upcoming:
 - Added mac to the installation guide
 - Added smart watch to the installation guide
 - WSL is next
+
+#
+9 Apr 2022
+- Added the latest device as $DEVICE4, and moved others up one number.
