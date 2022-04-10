@@ -4,20 +4,25 @@ BASH Bolus Calculator Simulator for insulin pumps with bolus calculator in The N
 
 The simulator works interactive and allows for simulation of the bolus calculations of the following devices:
 
+. manufacturer_1
 - $DEVICE1 - Testing (demo operational)
 - $DEVICE2 - Testing (demo operational)
 - $DEVICE3 - Testing (demo operational (might be scrapped))
 - $DEVICE4 - Testing (demo operational)
 
+. manufacturer_2
 - $DEVICE5 - Testing (demo pending)
 - $DEVICE6 - Bolus calculator specifications in the user guide are either incomplete or incorrect
 
+.manufacturer_3
 - $DEVICE7 - Bolus calculator specifications in the user guide are either incomplete or incorrect
 - $DEVICE8 - Bolus calculator specifications in the user guide are either incomplete or incorrect
 - $DEVICE9 - Bolus calculator specifications in the user guide are either incomplete or incorrect
 
+.manufacturer_4
 - $DEVICE10 - Bolus calculator specifications in the user guide are either incomplete or incorrect
 
+.manufacturer_5
 - $DEVICE11 - Bolus calculator specifications in the user guide are either incomplete or incorrect
 
 #
