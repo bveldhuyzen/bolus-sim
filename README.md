@@ -132,4 +132,4 @@ Upcoming:
 
 #
 10 Apr 2022
-- Of the manufacters that provided incomplete or incorrect specifications of the bolus calculator, an appropriate term of one year (after notification) has now passed, or this term is nearing. 
+- Of the manufacters that provided incomplete or incorrect specifications of the bolus calculator, with the exception of device 6, an appropriate term of one year (after notification) has now passed, or this term is nearing. 
