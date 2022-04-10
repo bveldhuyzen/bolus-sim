@@ -129,3 +129,7 @@ Upcoming:
 #
 9 Apr 2022
 - Added the latest device as $DEVICE4, and moved others up one number.
+
+#
+10 Apr 2022
+- Of the manufacters that provided incomplete or incorrect specifications of the bolus calculator, an appropriate term of one year (after notification) has now passed, or this term is nearing. 
