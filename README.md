@@ -133,3 +133,7 @@ Upcoming:
 #
 10 Apr 2022
 - Of the manufacters that provided incomplete or incorrect specifications of the bolus calculator, with the exception of device 6, an appropriate term of one year (after notification) has now passed, or this term is nearing. 
+
+#
+3 Sept 2022
+- Sending last reminders. The one year deadline for device 6 is almost passed, which to keep things fair will be the release date.
