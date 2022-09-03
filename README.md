@@ -136,4 +136,4 @@ Upcoming:
 
 #
 3 Sept 2022
-- Sending last reminders. The one year deadline for device 6 is almost passed, which to keep things fair will be the release date.
+- Sending last reminders. The term of one year for device 6 has almost passed, which (to keep things fair) will be the release date.
