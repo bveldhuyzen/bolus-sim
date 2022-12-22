@@ -94,46 +94,4 @@ To be further specified.
 #
 # Change log
 
-Upcoming:
-
-- Release of testrun data for the simulators of $DEVICE1, $DEVICE2, $DEVICE3 
-- Release of the (demo/preliminary) simulator for $DEVICE4
-- Release of testrun data for the simulator of $DEVICE4
-- Possibly a demo of the simulators of $DEVICE5 and $DEVICE6 (depending on the manufacturers)
-- If so, then also testruns for the simulators of $DEVICE5 and $DEVICE6
-- Release of looping mode for all simulators (for validation purposes)
-- Release of used testing profiles for looping modes (for validation purposes)
-- Release of validation procedures for all simulators
-- User guide for all simulators pending
-- Update of installation guide to provide for a more detailed instruction on how to install and run on various systems (e.g. it probably also runs in Windows via WSL)
-- Reorganizing and streamlining of code
-- Release of device-diff-module to determine accuracy of rounded bolus suggestions (compared to raw)
-- Boluscalculators.com
-
-
-#
-10 Dec 2021:
-- Simulator of $DEVICE3 might be scrapped, since it is almost not used anymore.
-- Simulator of $DEVICE5 (UK) was added to provide some competition, but unfortunately the user guide does not specify a term (value) in regard to the bolus calculations. Of bolus calculations that include this value it cannot be confirmed if the calculations are performed as intended.
-- Added United Kingdom to description.
-- The updated simulator user guides for $DEVICE1 and $DEVICE2 are nearing completion.
-- Simulator user guide for $DEVICE4 in progress.
-
-
-#
-12 Dec 2021
-- Added mac to the installation guide
-- Added smart watch to the installation guide
-- WSL is next
-
-#
-9 Apr 2022
-- Added the latest device as $DEVICE4, and moved others up one number.
-
-#
-10 Apr 2022
-- Of the manufacters that provided incomplete or incorrect specifications of the bolus calculator, with the exception of device 6, an appropriate term of one year (after notification) has now passed, or this term is nearing. 
-
-#
-3 Sept 2022
-- Sending last reminders. The term of one year for device 6 has almost passed, which (to keep things fair) will be the release date.
+...updating...
