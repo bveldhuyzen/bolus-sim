@@ -40,7 +40,7 @@ IMPORTANT: ALWAYS RUN SIMULATOR FROM ITS OWN FOLDER
 #
 For linux:
 1. Open linux terminal
-2. Obtain required packages by typing "sudo apt-get install calc perl git" (without the "") and hit enter
+2. Obtain required packages by typing "sudo apt-get install calc perl git awk" (without the "") and hit enter
 3. Confirm the installation of the packages if required
 4. Obtain simulator by typing "git clone https://github.com/bveldhuyzen/bolus-sim.git" (without the "") and hit enter
 5. Go to folder by typing "cd bolus-sim" (without the "") and hit enter
@@ -53,7 +53,7 @@ For tablets and smartphones:
 4. Smaller screens have to be flipped horizontal for optimal experience
 5. Update the app by typing "pkg update" (without the "") and hit enter
 6. Select yes if prompted for confirmation during the update
-7. Obtain required packages by typing "pkg install calc perl git" (without the "") and hit enter
+7. Obtain required packages by typing "pkg install calc perl git gawk" (without the "") and hit enter
 8. Select yes if prompted for confirmations during the update
 9. Obtain script by typing "git clone https://github.com/bveldhuyzen/bolus-sim.git" (without the "") and hit enter
 10. Go to script folder by typing "cd bolus-sim" (without the "") and hit enter
