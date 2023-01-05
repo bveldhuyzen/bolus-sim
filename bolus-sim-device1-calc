@@ -487,7 +487,7 @@ cat yoursettings.txt > reversedmealbolus_iob_report.txt
 echo '' >> reversedmealbolus_iob_report.txt
 echo 'Your meal bolus + reversed correction adjusted for IOB is calculated as followed:' >> reversedmealbolus_iob_report.txt
 echo '' >> reversedmealbolus_iob_report.txt
-echo '(mealbolus - IOB correction ) - ((target BG - current BG) / correction factor)' >> reversedmealbolus_iob_report.txt
+echo '(mealbolus - IOB correction ) + ((target BG - current BG) / correction factor)' >> reversedmealbolus_iob_report.txt
 echo '' >> reversedmealbolus_iob_report.txt
 echo 'MEAL BOLUS' >> reversedmealbolus_iob_report.txt
 echo "$CURRENTCARB / $ICRATIO = $MEALBOLUS" >> reversedmealbolus_iob_report.txt
