@@ -94,4 +94,5 @@ To be further specified.
 #
 # Change log
 
-...updating...
+- All code releases are temporarily on hold
+- Considering to take this back underground
