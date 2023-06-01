@@ -95,4 +95,5 @@ To be further specified.
 # Change log
 
 - All code releases are temporarily on hold
-- Considering to take this back underground
+- Due to the difficult fix for general public of earlier reported Termux vulnerabilities, further release is pending until documentation of highly compatible safe run method is finished.
+- Please note: Installing Termux and running this simulator might expose your information to other applications/actors.
