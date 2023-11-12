@@ -19,7 +19,7 @@ bash -c '[ -d temp_data_sim ] && rm -rf temp_data_sim'
 
 #create new temp dir and cp and cd to dir
 mkdir 'temp_data_sim'
-cp iob_calc.sh temp_data_sim
+cp temp_data_sim
 cd temp_data_sim
 
 #removed 10000
@@ -27,6 +27,17 @@ cd temp_data_sim
 #if reversed correction is on ("1"), then it matches this file content
 echo '1' > on.txt
 
+
+perl -lne 'print "$1" if /Target BG: (.*)/' yoursettings.txt > setting1_entry_1.txt
+perl -lne 'print "$1" if /Minimum BG: (.*)/' yoursettings.txt > setting2_entry_1.txt
+perl -lne 'print "$1" if /Correct above BG: (.*)/' yoursettings.txt > correct_above_entry_1.txt
+perl -lne 'print "$1" if /IC ratio: (.*)/' yoursettings.txt > setting3_entry_1.txt
+perl -lne 'print "$1" if /Correction factor: (.*)/' yoursettings.txt > setting4_entry_1.txt
+perl -lne 'print "$1" if /Reversed correction: (.*)/' yoursettings.txt > setting5_entry.txt.txt
+perl -lne 'print "$1" if /Current BG: (.*)/' yoursettings.txt > addBG_entry_1.txt
+perl -lne 'print "$1" if /Carbohydrate consumption: (.*)/' yoursettings.txt > addCARB_entry_1.txt
+perl -lne 'print "$1" if /Current meal IOB: (.*)/' yoursettings.txt > addIOB_meal_entry_1.txt
+perl -lne 'print "$1" if /Current correction IOB: (.*)/' yoursettings.txt > addIOB_correction_entry_1.txt
 
 ON=$(<on.txt)
 MINBG=$(<setting2_entry_1.txt)
@@ -41,18 +52,6 @@ CURRENTIOB_MEAL=$(<addIOB_meal_entry_1.txt)
 CURRENTIOB_CORRECTION=$(<addIOB_correction_entry_1.txt)
 
 
-#merging entries into fil
-#echo 'Your settings' && date > yoursettings.txt
-#echo "Target BG: $TARGETBG" >> yoursettings.txt
-#echo "Minimum BG: $MINBG" >> yoursettings.txt
-#echo "Correct above BG: $CORRECT_ABOVE_BG" >> yoursettings.txt
-#echo "IC ratio: $ICRATIO" >> yoursettings.txt
-#echo "Correction factor: $CORRECTIONFACTOR" >> yoursettings.txt
-#echo "Reversed correction: $REVERSEDCORRECTION" >> yoursettings.txt
-#echo "Current BG: $CURRENTBG" >> yoursettings.txt
-#echo "Carbohydrate consumption: $CURRENTCARB" >> yoursettings.txt
-#echo "Current meal IOB: $CURRENTIOB_MEAL" >> yoursettings.txt
-#echo "Current correction IOB: $CURRENTIOB_CORRECTION" >> yoursettings.txt
 
 #ehi
 cat yoursettings.txt
@@ -71,7 +70,7 @@ echo '...'
 echo ''
 echo 'your settings are loaded'
 echo ''
-echo '****************************************************************************'
+echo '' '****************************************************************************'
 
 
 #total IOB
