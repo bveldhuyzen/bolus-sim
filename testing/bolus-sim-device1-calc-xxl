@@ -17,11 +17,6 @@ echo ''
 #if temp dir is still available, then remove temp dir
 bash -c '[ -d temp_data_sim ] && rm -rf temp_data_sim'
 
-#create new temp dir and cp and cd to dir
-mkdir 'temp_data_sim'
-cp temp_data_sim
-cd temp_data_sim
-
 #removed 10000
 
 #if reversed correction is on ("1"), then it matches this file content
@@ -50,6 +45,12 @@ CURRENTBG=$(<addBG_entry_1.txt)
 CURRENTCARB=$(<addCARB_entry_1.txt)
 CURRENTIOB_MEAL=$(<addIOB_meal_entry_1.txt)
 CURRENTIOB_CORRECTION=$(<addIOB_correction_entry_1.txt)
+
+
+#create new temp dir and cp and cd to dir
+mkdir 'temp_data_sim'
+cp temp_data_sim
+cd temp_data_sim
 
 
 
