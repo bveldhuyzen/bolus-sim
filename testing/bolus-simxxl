@@ -1,0 +1,3 @@
+for x in {1..200} ;
+do . bolus-sim-device1-calc-xxl
+done
