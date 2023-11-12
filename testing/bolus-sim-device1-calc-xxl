@@ -9,7 +9,7 @@
 
 echo '*************************************************************************************'
 echo ''
-echo 'BASH Bolus Calculator Simulator - interactive mode'
+echo 'BASH Bolus Calculator Simulator - looping mode'
 echo '...'
 echo '*************************************************************************************'
 echo ''
@@ -54,8 +54,8 @@ CURRENTIOB_CORRECTION=$(<addIOB_correction_entry_1.txt)
 
 
 #ehi
-cat yoursettings.txt
-echo '______________________________________________________________________'
+#cat yoursettings.txt
+#echo #'______________________________________________________________________'
 
 #read -p 'Confirm entries, then hit enter'
 
@@ -63,14 +63,14 @@ echo '______________________________________________________________________'
 #lightweight bolus calculator
 
 #the lines below print each of the user settings to a separate text file
-echo '____________________________________________________________'
+#echo #'____________________________________________________________'
 echo 'BASH Bolus Calculator Simulator'
 echo 'v1.099'
-echo '...'
-echo ''
-echo 'your settings are loaded'
-echo ''
-echo '' '****************************************************************************'
+#echo '...'
+#echo ''
+#echo 'your settings are loaded'
+#echo ''
+#echo '' '****************************************************************************'
 
 
 #total IOB
