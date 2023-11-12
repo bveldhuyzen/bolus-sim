@@ -240,21 +240,21 @@ mealbolus_final=$(<mealbolus_final.txt)
 ##bolus rule sets (1=true 0=false)
 #for meal bolus etc.
 
-if (( $CURRENTBG > $MINBG )) || (( $CURRENTBG = $MINBG ))
+if [[ $CURRENTBG > $MINBG ]] || [[ $CURRENTBG = $MINBG ]]
 then
 echo '1' > currentbg_ge_minbg.txt
 else
 echo '0' > currentbg_ge_minbg.txt
 fi
 
-if (( $CURRENTBG > $TARGETBG ))
+if [[ $CURRENTBG > $TARGETBG ]]
 then
 echo '1' > currentbg_eq_targetbg.txt
 else
 echo '0' > currentbg_eq_targetbg.txt
 fi
 
-if (( $CURRENTCARB > 0 ))
+if [[ $CURRENTCARB > 0 ]]
 then
 echo '1' > currentcarb_gt_zero.txt
 else
@@ -263,14 +263,14 @@ fi
 
 #for reversed correction
 
-if (( $CURRENTBG < $TARGETBG ))
+if [[ $CURRENTBG < $TARGETBG ]]
 then
 echo '1' > currentbg_lt_targetbg.txt
 else
 echo '0' > currentbg_lt_targetbg.txt
 fi
 
-if (( $REVERSEDCORRECTION = 1 ))
+if [[ $REVERSEDCORRECTION = 1 ]]
 then
 echo '1' > reversedcorrection_eq_one.txt
 else
@@ -279,21 +279,21 @@ fi
 
 #for correction bolus etc.
 
-if (( $CURRENTBG > $TARGETBG ))
+if [[ $CURRENTBG > $TARGETBG ]]
 then
 echo '1' > currentbg_gt_targetbg.txt
 else
 echo '0' > currentbg_gt_targetbg.txt
 fi
 
-if (( $CURRENTCARB = 0 ))
+if [[ $CURRENTCARB = 0 ]]
 then
 echo '1' > currentcarb_eq_zero.txt
 else
 echo '0' > currentcarb_eq_zero.txt
 fi
 
-if (( $CURRENTBG > $CORRECT_ABOVE_BG ))
+if [[ $CURRENTBG > $CORRECT_ABOVE_BG ]]
 then
 echo '1' > currentbg_gt_correctabovebg.txt
 else
@@ -323,7 +323,7 @@ CORRECTIONBOLUSMINUSIOB_GT_ZERO=$(<correctionbolusminusiob_is_positive_for_if_th
 
 
 #your meal IOB is:
-if (( $CURRENTIOBMEAL_GT_ZERO = 1 ))
+if [[ $CURRENTIOBMEAL_GT_ZERO -eq 1 ]]
 then
 echo 'you still have ' > meal_IOB_alert_add.txt
 cat addIOB_meal_entry_1.txt >> meal_IOB_alert_add.txt
@@ -334,7 +334,7 @@ cat meal_IOB_alert.txt
 fi
 
 #your correction IOB is:
-if (( $CURRENTIOBCORRECTION_GT_ZERO = 1 ))
+if [[ $CURRENTIOBCORRECTION_GT_ZERO -eq 1 ]]
 then
 echo 'you still have ' > correction_IOB_alert_add.txt.txt
 cat addIOB_meal_entry_1.txt >> correction_IOB_alert_add.txt
@@ -363,7 +363,7 @@ echo '____________________________________________________________'
 
 #visual presentation
 echo 'MEAL BOLUS (just a meal bolus)'
-if (( $CURRENTBG_GE_MINBG = 1 )) && (( $CURRENTBG_EQ_TARGETBG = 1 )) && (( $CURRENTCARB_GT_ZERO = 1 ))) 
+if [[ $CURRENTBG_GE_MINBG -eq 1 ]] && [[ $CURRENTBG_EQ_TARGETBG -eq 1 ]] && [[ $CURRENTCARB_GT_ZERO -eq 1 ]]
 then
 echo ''
 cat yoursettings.txt > mealbolus_report.txt
