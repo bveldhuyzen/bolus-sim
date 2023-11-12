@@ -237,60 +237,24 @@ sed -e 's/^[\t]*//' mealbolusminusIOB.txt > mealbolus_final.txt
 mealbolus_final=$(<mealbolus_final.txt)
 
 
-##in use for if_then
-#multiplication factor
-calc -d "$TARGETBG * $TENTHOUSAND" > targetbg10000_space.txt
-sed -e 's/^[\t]*//' targetbg10000_space.txt > targetbg10000.txt
-calc -d "$MINBG * $TENTHOUSAND" > minbg10000_space.txt
-sed -e 's/^[\t]*//' minbg10000_space.txt > minbg10000.txt
-calc -d "$CORRECT_ABOVE_BG * $TENTHOUSAND" > correct_above_bg_10000_space.txt
-sed -e 's/^[\t]*//' correct_above_bg_10000_space.txt > correct_above_bg_10000.txt
-calc -d "$ICRATIO * $TENTHOUSAND" > icratio10000_space.txt
-sed -e 's/^[\t]*//' icratio10000_space.txt > icratio10000.txt
-calc -d "$CURRENTCARB * $TENTHOUSAND" > currentcarb10000_space.txt
-sed -e 's/^[\t]*//' currentcarb10000_space.txt > currentcarb10000.txt
-calc -d "$CURRENTBG * $TENTHOUSAND" > currentbg10000_space.txt
-sed -e 's/^[\t]*//' currentbg10000_space.txt > currentbg10000.txt
-calc -d "$CURRENTIOB_MEAL* $TENTHOUSAND" > currentiob_meal_manual_entry_10000_space.txt
-sed -e 's/^[\t]*//' currentiob_meal_manual_entry_10000_space.txt > currentiob_meal_manual_entry_10000.txt
-calc -d "$CURRENTIOB_CORRECTION * $TENTHOUSAND" > currentiob_correction_manual_entry_10000_space.txt
-sed -e 's/^[\t]*//' currentiob_correction_manual_entry_10000_space.txt > currentiob_correction_manual_entry_10000.txt
-calc -d "$TOTALIOB * $TENTHOUSAND" > totaliob_manual_entry_10000_space.txt
-sed -e 's/^[\t]*//' totaliob_manual_entry_10000_space.txt > totaliob_manual_entry_10000.txt
-calc -d "$correctionbolusminusIOB * $TENTHOUSAND" > correctionbolusminusIOB_manual_entry_10000_space.txt
-sed -e 's/^[\t]*//' correctionbolusminusIOB_manual_entry_10000_space.txt > correctionbolusminusIOB_manual_entry_10000.txt
-
-#new variables
-TARGETBG10000=$(<targetbg10000.txt)
-MINBG10000=$(<minbg10000.txt)
-CORRECT_ABOVE_BG10000=$(<correct_above_bg_10000.txt)
-ICRATIO10000=$(<icratio10000.txt)
-CURRENTBG10000=$(<currentbg10000.txt)
-CURRENTCARB10000=$(<currentcarb10000.txt)
-CURRENTIOB_MEAL10000=$(<currentiob_meal_manual_entry_10000.txt)
-CURRENTIOB_CORRECTION10000=$(<currentiob_correction_manual_entry_10000.txt)
-TOTALIOB10000=$(<totaliob_manual_entry_10000.txt)
-correctionbolusminusIOB10000=$(<correctionbolusminusIOB_manual_entry_10000.txt)
-
-
 ##bolus rule sets (1=true 0=false)
 #for meal bolus etc.
 
-if [[ $CURRENTBG10000 -ge $MINBG10000 ]]
+if [[ $CURRENTBG > $MINBG ]] || [[ $CURRENTBG = $MINBG ]]
 then
 echo '1' > currentbg_ge_minbg.txt
 else
 echo '0' > currentbg_ge_minbg.txt
 fi
 
-if [[ $CURRENTBG10000 -eq $TARGETBG10000 ]]
+if [[ $CURRENTBG > $TARGETBG ]]
 then
 echo '1' > currentbg_eq_targetbg.txt
 else
 echo '0' > currentbg_eq_targetbg.txt
 fi
 
-if [[ $CURRENTCARB10000 -gt 0 ]]
+if [[ $CURRENTCARB > 0 ]]
 then
 echo '1' > currentcarb_gt_zero.txt
 else
@@ -299,14 +263,14 @@ fi
 
 #for reversed correction
 
-if [[ $CURRENTBG10000 -lt $TARGETBG10000 ]]
+if [[ $CURRENTBG < $TARGETBG ]]
 then
 echo '1' > currentbg_lt_targetbg.txt
 else
 echo '0' > currentbg_lt_targetbg.txt
 fi
 
-if [[ $REVERSEDCORRECTION -eq 1 ]]
+if [[ $REVERSEDCORRECTION = 1 ]]
 then
 echo '1' > reversedcorrection_eq_one.txt
 else
@@ -315,21 +279,21 @@ fi
 
 #for correction bolus etc.
 
-if [[ $CURRENTBG10000 -gt $TARGETBG10000 ]]
+if [[ $CURRENTBG > $TARGETBG ]]
 then
 echo '1' > currentbg_gt_targetbg.txt
 else
 echo '0' > currentbg_gt_targetbg.txt
 fi
 
-if [[ $CURRENTCARB10000 -eq 0 ]]
+if [[ $CURRENTCARB = 0 ]]
 then
 echo '1' > currentcarb_eq_zero.txt
 else
 echo '0' > currentcarb_eq_zero.txt
 fi
 
-if [[ $CURRENTBG10000 -gt $CORRECT_ABOVE_BG10000 ]]
+if [[ $CURRENTBG > $CORRECT_ABOVE_BG ]]
 then
 echo '1' > currentbg_gt_correctabovebg.txt
 else
@@ -338,11 +302,11 @@ fi
 
 
 #for IOB if_then
-calc -d "$CURRENTIOB_MEAL10000 + $CURRENTIOB_CORRECTION10000" > totalIOB10000_space.txt
-sed -e 's/^[\t]*//' totalIOB10000_space.txt > totalIOB10000.txt
-TOTALIOB10000=$(<totalIOB10000.txt)
+calc -d "$CURRENTIOB_MEAL + $CURRENTIOB_CORRECTION" > totalIOB_space.txt
+sed -e 's/^[\t]*//' totalIOB_space.txt > totalIOB.txt
+TOTALIOB=$(<totalIOB.txt)
 
-awk '$1>0 {$1=1} 1' totalIOB10000.txt > total_iob_is_positive_for_if_then.txt
+awk '$1>0 {$1=1} 1' totalIOB.txt > total_iob_is_positive_for_if_then.txt
 TOTALIOB_GT_ZERO=$(<total_iob_is_positive_for_if_then.txt)
 
 awk '$1>0 {$1=1} 1' addIOB_meal.txt > currentiobmeal_is_positive_for_if_then.txt
