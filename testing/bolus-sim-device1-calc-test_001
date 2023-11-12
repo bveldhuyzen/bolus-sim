@@ -1,5 +1,5 @@
 #!/bin/bash
-#v1.09
+#v1.099
 #Stand-alone bolus calculator simulator for $DEVICE1 - high accuracy mode
 #
 #https://www.boluscalculators.com
@@ -240,7 +240,7 @@ mealbolus_final=$(<mealbolus_final.txt)
 ##bolus rule sets (1=true 0=false)
 #for meal bolus etc.
 
-if echo "$CURRENTBG > $MINBG" | bc -l | grep -q 1
+if echo "$CURRENTBG > $MINBG" | bc -l | grep -q 1 || echo "$CURRENTBG = $MINBG" | bc -l | grep -q 1
 then
 echo '1' > currentbg_ge_minbg.txt
 else
