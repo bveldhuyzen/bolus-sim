@@ -336,8 +336,8 @@ fi
 #your correction IOB is:
 if [[ $CURRENTIOBCORRECTION_GT_ZERO -eq 1 ]]
 then
-echo 'you still have ' > addIOB_meal_entry_1.txt
-cat addIOB_correction.txt >> correction_IOB_alert_add.txt
+echo 'you still have ' > correction_IOB_alert_add.txt.txt
+cat addIOB_meal_entry_1.txt >> correction_IOB_alert_add.txt
 echo ' units of insulin on board (from previous correction)' >> correction_IOB_alert_add.txt
 cat correction_IOB_alert_add.txt | tr -d '\n' > correction_IOB_alert.txt
 echo '' >> correction_IOB_alert.txt
