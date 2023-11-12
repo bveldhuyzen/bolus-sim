@@ -15,7 +15,7 @@ echo '**************************************************************************
 echo ''
 
 #if temp dir is still available, then remove temp dir
-bash -c '[ -d temp_data_sim ] && rm -rf temp_data_sim'
+#bash -c '[ -d temp_data_sim ] && rm -rf temp_data_sim'
 
 #removed 10000
 
@@ -48,9 +48,9 @@ CURRENTIOB_CORRECTION=$(<addIOB_correction_entry_1.txt)
 
 
 #create new temp dir and cp and cd to dir
-mkdir 'temp_data_sim'
+#mkdir 'temp_data_sim'
 #cp temp_data_sim
-cd temp_data_sim
+#cd temp_data_sim
 
 
 
@@ -544,8 +544,8 @@ echo '______________________________________________________________________'
 
 
 #removal of temporary files
-cd -
-rm -rf temp_data_sim
+#cd -
+#rm -rf temp_data_sim
 
 
 #
