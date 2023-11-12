@@ -326,7 +326,7 @@ CORRECTIONBOLUSMINUSIOB_GT_ZERO=$(<correctionbolusminusiob_is_positive_for_if_th
 if [[ $CURRENTIOBMEAL_GT_ZERO -eq 1 ]]
 then
 echo 'you still have ' > meal_IOB_alert_add.txt
-cat addIOB_meal.txt >> meal_IOB_alert_add.txt
+cat addIOB_meal_entry_1.txt >> meal_IOB_alert_add.txt
 echo ' units of insulin on board (from previous meal bolus)' >> meal_IOB_alert_add.txt
 cat meal_IOB_alert_add.txt | tr -d '\n' > meal_IOB_alert.txt
 echo '' >> meal_IOB_alert.txt
@@ -336,7 +336,7 @@ fi
 #your correction IOB is:
 if [[ $CURRENTIOBCORRECTION_GT_ZERO -eq 1 ]]
 then
-echo 'you still have ' > correction_IOB_alert_add.txt
+echo 'you still have ' > addIOB_meal_entry_1.txt
 cat addIOB_correction.txt >> correction_IOB_alert_add.txt
 echo ' units of insulin on board (from previous correction)' >> correction_IOB_alert_add.txt
 cat correction_IOB_alert_add.txt | tr -d '\n' > correction_IOB_alert.txt
