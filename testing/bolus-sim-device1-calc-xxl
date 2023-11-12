@@ -542,6 +542,12 @@ fi
 echo '______________________________________________________________________'
 
 
+
+#removal of temporary files
+cd -
+rm -rf temp_data_sim
+
+
 #
 #calc -d "$CURRENTCARB + 1" > newcarb_space.txt
 #sed -e 's/^[\t]*//' newcarb_space.txt > newcarb.txt
@@ -581,14 +587,8 @@ echo "Current correction IOB: $CURRENTIOB_CORRECTION" >> yoursettings.txt
 
 
 
-
-
 #pause line
 #read -p 'check your calculations, then hit #enter to clear cache'
-
-#removal of temporary files
-cd -
-rm -rf temp_data_sim
 
 
 #V
