@@ -240,14 +240,14 @@ mealbolus_final=$(<mealbolus_final.txt)
 ##bolus rule sets (1=true 0=false)
 #for meal bolus etc.
 
-if echo "$CURRENTBG > $MINBG" | bc -l | grep -q 1 || echo "$CURRENTBG = $MINBG" | bc -l | grep -q 1
+if echo "$CURRENTBG > $MINBG" | bc -l | grep -q 1 || echo "$CURRENTBG == $MINBG" | bc -l | grep -q 1
 then
 echo '1' > currentbg_ge_minbg.txt
 else
 echo '0' > currentbg_ge_minbg.txt
 fi
 
-if echo "$CURRENTBG = $TARGETBG" | bc -l | grep -q 1
+if echo "$CURRENTBG == $TARGETBG" | bc -l | grep -q 1
 then
 echo '1' > currentbg_eq_targetbg.txt
 else
@@ -270,7 +270,7 @@ else
 echo '0' > currentbg_lt_targetbg.txt
 fi
 
-if echo "$REVERSEDCORRECTION = 1" | bc -l | grep -q 1
+if [[ $REVERSEDCORRECTION -eq 1 ]]
 then
 echo '1' > reversedcorrection_eq_one.txt
 else
@@ -286,7 +286,7 @@ else
 echo '0' > currentbg_gt_targetbg.txt
 fi
 
-if echo "$CURRENTCARB = 0" | bc -l | grep -q 1
+if echo "$CURRENTCARB == 0" | bc -l | grep -q 1
 then
 echo '1' > currentcarb_eq_zero.txt
 else
