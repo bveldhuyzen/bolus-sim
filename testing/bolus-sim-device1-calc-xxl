@@ -49,7 +49,7 @@ CURRENTIOB_CORRECTION=$(<addIOB_correction_entry_1.txt)
 
 #create new temp dir and cp and cd to dir
 mkdir 'temp_data_sim'
-cp temp_data_sim
+#cp temp_data_sim
 cd temp_data_sim
 
 
