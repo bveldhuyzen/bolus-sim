@@ -33,7 +33,7 @@ perl -lne 'print "$1" if /Minimum BG: (.*)/' yoursettings.txt > setting2_entry_1
 perl -lne 'print "$1" if /Correct above BG: (.*)/' yoursettings.txt > correct_above_entry_1.txt
 perl -lne 'print "$1" if /IC ratio: (.*)/' yoursettings.txt > setting3_entry_1.txt
 perl -lne 'print "$1" if /Correction factor: (.*)/' yoursettings.txt > setting4_entry_1.txt
-perl -lne 'print "$1" if /Reversed correction: (.*)/' yoursettings.txt > setting5_entry.txt.txt
+perl -lne 'print "$1" if /Reversed correction: (.*)/' yoursettings.txt > setting5_entry.txt
 perl -lne 'print "$1" if /Current BG: (.*)/' yoursettings.txt > addBG_entry_1.txt
 perl -lne 'print "$1" if /Carbohydrate consumption: (.*)/' yoursettings.txt > addCARB_entry_1.txt
 perl -lne 'print "$1" if /Current meal IOB: (.*)/' yoursettings.txt > addIOB_meal_entry_1.txt
