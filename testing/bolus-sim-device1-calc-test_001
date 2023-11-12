@@ -309,10 +309,10 @@ TOTALIOB=$(<totalIOB.txt)
 awk '$1>0 {$1=1} 1' totalIOB.txt > total_iob_is_positive_for_if_then.txt
 TOTALIOB_GT_ZERO=$(<total_iob_is_positive_for_if_then.txt)
 
-awk '$1>0 {$1=1} 1' addIOB_meal.txt > currentiobmeal_is_positive_for_if_then.txt
+awk '$1>0 {$1=1} 1' addIOB_meal_entry_1.txt > currentiobmeal_is_positive_for_if_then.txt
 CURRENTIOBMEAL_GT_ZERO=$(<currentiobmeal_is_positive_for_if_then.txt)
 
-awk '$1>0 {$1=1} 1' addIOB_correction.txt > currentiobcorrection_is_positive_for_if_then.txt
+awk '$1>0 {$1=1} 1' addIOB_correction_entry_1.txt > currentiobcorrection_is_positive_for_if_then.txt
 CURRENTIOBCORRECTION_GT_ZERO=$(<currentiobcorrection_is_positive_for_if_then.txt)
 
 
