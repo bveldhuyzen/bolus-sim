@@ -247,7 +247,7 @@ else
 echo '0' > currentbg_ge_minbg.txt
 fi
 
-if [[ $CURRENTBG > $TARGETBG ]]
+if [[ $CURRENTBG = $TARGETBG ]]
 then
 echo '1' > currentbg_eq_targetbg.txt
 else
