@@ -307,7 +307,7 @@ sed -e 's/^[\t]*//' totalIOB_space.txt > totalIOB.txt
 TOTALIOB=$(<totalIOB.txt)
 
 awk '$1>0 {$1=1} 1' totalIOB.txt > total_iob_is_positive_for_if_then.txt
-TOTALIOB_GT_ZERO=$(<total_iob_is_positive_for_if_then.txt)
+TOTALIOB_GT_ZERO=and$(<total_iob_is_positive_for_if_then.txt)
 
 awk '$1>0 {$1=1} 1' addIOB_meal_entry_1.txt > currentiobmeal_is_positive_for_if_then.txt
 CURRENTIOBMEAL_GT_ZERO=$(<currentiobmeal_is_positive_for_if_then.txt)
@@ -337,7 +337,7 @@ fi
 if [[ $CURRENTIOBCORRECTION_GT_ZERO -eq 1 ]]
 then
 echo 'you still have ' > correction_IOB_alert_add.txt.txt
-cat addIOB_meal_entry_1.txt >> correction_IOB_alert_add.txt
+cat addIOB_correction_entry_1.txt >> correction_IOB_alert_add.txt
 echo ' units of insulin on board (from previous correction)' >> correction_IOB_alert_add.txt
 cat correction_IOB_alert_add.txt | tr -d '\n' > correction_IOB_alert.txt
 echo '' >> correction_IOB_alert.txt
