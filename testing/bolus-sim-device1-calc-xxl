@@ -27,89 +27,6 @@ cd temp_data_sim
 #if reversed correction is on ("1"), then it matches this file content
 echo '1' > on.txt
 
-#IOB calculator required?
-echo 'Did you administer a bolus recently? (1=yes, 0=no)'
-read yes_no
-echo $yes_no > yes_no.txt
-echo '1' > yes_yes.txt
-echo '0' > no_no.txt
-yes=$(<yes_yes.txt)
-no=$(<no_no.txt)
-echo '______________________________________________________________________'
-
-#yes/no
-if [[ $yes_no -eq $yes ]]
-then
-bash iob_calc.sh | tee
-fi
-
-if [[ $yes_no -eq $no ]]
-then
-echo '*************************************************************************************'
-echo 'You have no meal IOB and no correction IOB'
-echo '*************************************************************************************'
-fi
-echo '______________________________________________________________________'
-
-echo 'Target BG:'
-read targetBG
-echo "$targetBG" > setting1_entry.txt
-sed 's/,/./g' setting1_entry.txt > setting1_entry_1.txt
-echo '______________________________________________________________________'
-
-echo 'Minimum BG:'
-read minimumBG
-echo "$minimumBG" > setting2_entry.txt
-sed 's/,/./g' setting2_entry.txt > setting2_entry_1.txt
-echo '______________________________________________________________________'
-
-echo 'Correct above (BG)'
-read correct_above
-echo "$correct_above" > correct_above_entry.txt
-sed 's/,/./g' correct_above_entry.txt > correct_above_entry_1.txt
-echo '______________________________________________________________________'
-
-echo 'IC ratio (one unit of insulin consumes X(X(X)) grams of carbohydrates)'
-read ICratio
-echo "$ICratio" > setting3_entry.txt
-sed 's/,/./g' setting3_entry.txt > setting3_entry_1.txt
-echo '______________________________________________________________________'
-
-echo 'Correction factor (decrease of BG per unit of insulin)'
-read correctionfactor
-echo "$correctionfactor" > setting4_entry.txt
-sed 's/,/./g' setting4_entry.txt > setting4_entry_1.txt
-echo '______________________________________________________________________'
-
-echo 'Reverse correction on (1) or off (0)'
-read reversedcorrection
-echo "$reversedcorrection" > setting5_entry.txt
-echo '______________________________________________________________________'
-
-#if no BG available, current BG has to be set as target BG)
-echo 'Current BG (if no current BG available, current BG has to be set as target BG):'
-read addBG
-echo "$addBG" > addBG_entry.txt
-sed 's/,/./g' addBG_entry.txt > addBG_entry_1.txt
-echo '______________________________________________________________________'
-
-echo 'Carbohydrate consumption in gram:'
-read carb_intake
-echo "$carb_intake" > addCARB_entry.txt
-sed 's/,/./g' addCARB_entry.txt > addCARB_entry_1.txt
-echo '______________________________________________________________________'
-
-echo 'Current meal IOB:'
-read mealIOB
-echo "$mealIOB" > addIOB_meal_entry.txt
-sed 's/,/./g' addIOB_meal_entry.txt > addIOB_meal_entry_1.txt
-echo '______________________________________________________________________'
-
-echo 'Current correction IOB:'
-read correctionIOB
-echo "$correctionIOB" > addIOB_correction_entry.txt
-sed 's/,/./g' addIOB_correction_entry.txt > addIOB_correction_entry_1.txt
-echo '______________________________________________________________________'
 
 ON=$(<on.txt)
 MINBG=$(<setting2_entry_1.txt)
@@ -124,24 +41,24 @@ CURRENTIOB_MEAL=$(<addIOB_meal_entry_1.txt)
 CURRENTIOB_CORRECTION=$(<addIOB_correction_entry_1.txt)
 
 
-#merging entries into file
-echo 'Your settings' && date > yoursettings.txt
-echo "Target BG: $TARGETBG" >> yoursettings.txt
-echo "Minimum BG: $MINBG" >> yoursettings.txt
-echo "Correct above BG: $CORRECT_ABOVE_BG" >> yoursettings.txt
-echo "IC ratio: $ICRATIO" >> yoursettings.txt
-echo "Correction factor: $CORRECTIONFACTOR" >> yoursettings.txt
-echo "Reversed correction: $REVERSEDCORRECTION" >> yoursettings.txt
-echo "Current BG: $CURRENTBG" >> yoursettings.txt
-echo "Carbohydrate consumption: $CURRENTCARB" >> yoursettings.txt
-echo "Current meal IOB: $CURRENTIOB_MEAL" >> yoursettings.txt
-echo "Current correction IOB: $CURRENTIOB_CORRECTION" >> yoursettings.txt
+#merging entries into fil
+#echo 'Your settings' && date > yoursettings.txt
+#echo "Target BG: $TARGETBG" >> yoursettings.txt
+#echo "Minimum BG: $MINBG" >> yoursettings.txt
+#echo "Correct above BG: $CORRECT_ABOVE_BG" >> yoursettings.txt
+#echo "IC ratio: $ICRATIO" >> yoursettings.txt
+#echo "Correction factor: $CORRECTIONFACTOR" >> yoursettings.txt
+#echo "Reversed correction: $REVERSEDCORRECTION" >> yoursettings.txt
+#echo "Current BG: $CURRENTBG" >> yoursettings.txt
+#echo "Carbohydrate consumption: $CURRENTCARB" >> yoursettings.txt
+#echo "Current meal IOB: $CURRENTIOB_MEAL" >> yoursettings.txt
+#echo "Current correction IOB: $CURRENTIOB_CORRECTION" >> yoursettings.txt
 
 #ehi
 cat yoursettings.txt
 echo '______________________________________________________________________'
 
-read -p 'Confirm entries, then hit enter'
+#read -p 'Confirm entries, then hit enter'
 
 ###inserting here
 #lightweight bolus calculator
@@ -625,8 +542,49 @@ fi
 echo '______________________________________________________________________'
 
 
+#
+#calc -d "$CURRENTCARB + 1" > newcarb_space.txt
+#sed -e 's/^[\t]*//' newcarb_space.txt > newcarb.txt
+#NEWCARB=$(<newcarb.txt)
+
+calc -d "$CURRENTBG + 0.01" > newbg_space.txt
+sed -e 's/^[\t]*//' newbg_space.txt > newbg.txt
+NEWBG=$(<newbg.txt)
+
+#calc "$NEWBG * $TENTHOUSAND" > newbg_10000_space.txt
+#sed -e 's/^[\t]*//' newbg_10000_space.txt > newbg_10000.txt
+#NEWBG10000=$(<newbg_10000.txt)
+
+
+#if [[ $NEWBG10000 -gt 900000 ]] && [[ $NEWBG10000 -lt 1700000 ]]
+#then
+#calc -d "$CURRENTCARB + 1" > newcarb_space.txt
+#sed -e 's/^[\t]*//' newcarb_space.txt > newcarb.txt
+#NEWCARB=$(<newcarb.txt)
+#else
+#NEWCARB=0
+#fi
+
+
+#generating next settings file
+echo 'Your settings' > yoursettings.txt
+echo "Target BG: $TARGETBG" >> yoursettings.txt
+echo "Minimum BG: $MINBG" >> yoursettings.txt
+echo "Correct above BG: $CORRECT_ABOVE_BG" >> yoursettings.txt
+echo "IC ratio: $ICRATIO" >> yoursettings.txt
+echo "Correction factor: $CORRECTIONFACTOR" >> yoursettings.txt
+echo "Reversed correction: $REVERSEDCORRECTION" >> yoursettings.txt
+echo "Current BG: $NEWBG" >> yoursettings.txt
+echo "Carbohydrate consumption: $CURRENTCARB" >> yoursettings.txt
+echo "Current meal IOB: $CURRENTIOB_MEAL" >> yoursettings.txt
+echo "Current correction IOB: $CURRENTIOB_CORRECTION" >> yoursettings.txt
+
+
+
+
+
 #pause line
-read -p 'check your calculations, then hit enter to clear cache'
+#read -p 'check your calculations, then hit #enter to clear cache'
 
 #removal of temporary files
 cd -
