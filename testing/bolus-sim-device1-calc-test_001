@@ -363,7 +363,7 @@ echo '____________________________________________________________'
 
 #visual presentation
 echo 'MEAL BOLUS (just a meal bolus)'
-if (( $CURRENTBG_GE_MINBG = 1 )) && (( $CURRENTBG_EQ_TARGETBG = 1 )) && (( $CURRENTCARB_GT_ZERO = 1 )) 
+if [[ $CURRENTBG_GE_MINBG = 1 ]] && [[ $CURRENTBG_EQ_TARGETBG = 1 ]] && [[ $CURRENTCARB_GT_ZERO = 1 ]] 
 then
 echo ''
 cat yoursettings.txt > mealbolus_report.txt
@@ -388,7 +388,7 @@ echo '______________________________________________________________________'
 
 
 echo 'MEAL BOLUS + reversed correction'
-if (( $CURRENTCARB_GT_ZERO = 1 )) && (( $CURRENTBG_GE_MINBG = 1 )) && (( $CURRENTBG_LT_TARGETBG = 1 )) && (( $REVERSEDCORRECTION_EQ_ONE = 1 )) && (( $TOTALIOB_GT_ZERO = 0 ))
+if [[ $CURRENTCARB_GT_ZERO = 1 ]] && [[ $CURRENTBG_GE_MINBG = 1 ]] && [[ $CURRENTBG_LT_TARGETBG = 1 ]] && [[ $REVERSEDCORRECTION_EQ_ONE = 1 ]] && [[ $TOTALIOB_GT_ZERO = 0 ]]
 then
 echo ''
 cat yoursettings.txt > reversedmealbolus_report.txt
@@ -420,7 +420,7 @@ echo '______________________________________________________________________'
 
 
 echo 'MEAL BOLUS + reversed correction adjusted for IOB'
-if (( $CURRENTCARB_GT_ZERO = 1 )) && (( $CURRENTBG_GE_MINBG = 1 )) && (( $CURRENTBG_LT_TARGETBG = 1 )) && (( $REVERSEDCORRECTION_EQ_ONE = 1 )) && (( $TOTALIOB_GT_ZERO = 1 ))
+if [[ $CURRENTCARB_GT_ZERO = 1 ]] && [[ $CURRENTBG_GE_MINBG = 1 ]] && [[ $CURRENTBG_LT_TARGETBG = 1 ]] && [[ $REVERSEDCORRECTION_EQ_ONE = 1 ]] && [[ $TOTALIOB_GT_ZERO = 1 ]]
 then
 echo ''
 cat yoursettings.txt > reversedmealbolus_iob_report.txt
