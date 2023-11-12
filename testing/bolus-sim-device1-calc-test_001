@@ -22,10 +22,7 @@ mkdir 'temp_data_sim'
 cp iob_calc.sh temp_data_sim
 cd temp_data_sim
 
-#to add a lot of zeroes to remove the decimal used at the user entries 
-##currently the script accepts in the user entries an amount of decimals equal to the amount of zeroes in the echo
-echo '1000000000' > 10000.txt
-TENTHOUSAND=$(<10000.txt)
+#removed 10000
 
 #if reversed correction is on ("1"), then it matches this file content
 echo '1' > on.txt
@@ -114,30 +111,31 @@ echo "$correctionIOB" > addIOB_correction_entry.txt
 sed 's/,/./g' addIOB_correction_entry.txt > addIOB_correction_entry_1.txt
 echo '______________________________________________________________________'
 
-#variables
-minimumBG_1=$(<setting2_entry_1.txt)
-targetBG_1=$(<setting1_entry_1.txt)
-correct_above_1=$(<correct_above_entry_1.txt)
-ICratio_1=$(<setting3_entry_1.txt)
-correctionfactor_1=$(<setting4_entry_1.txt)
-#reversedcorrection_1=$(<setting5_entry.txt)
-addBG_1=$(<addBG_entry_1.txt)
-carb_intake_1=$(<addCARB_entry_1.txt)
-mealIOB_1=$(<addIOB_meal_entry_1.txt)
-correctionIOB_1=$(<addIOB_correction_entry_1.txt)
+ON=$(<on.txt)
+MINBG=$(<setting2_entry_1.txt)
+TARGETBG=$(<setting1_entry_1.txt)
+CORRECT_ABOVE_BG=$(<correct_above_entry_1.txt)
+ICRATIO=$(<setting3_entry_1.txt)
+CORRECTIONFACTOR=$(<setting4_entry_1.txt)
+REVERSEDCORRECTION=$(<setting5_entry.txt)
+CURRENTBG=$(<addBG_entry_1.txt)
+CURRENTCARB=$(<addCARB_entry_1.txt)
+CURRENTIOB_MEAL=$(<addIOB_meal_entry_1.txt)
+CURRENTIOB_CORRECTION=$(<addIOB_correction_entry_1.txt)
+
 
 #merging entries into file
 echo 'Your settings' && date > yoursettings.txt
-echo "Target BG: $targetBG_1" >> yoursettings.txt
-echo "Minimum BG: $minimumBG_1" >> yoursettings.txt
-echo "Correct above BG: $correct_above_1" >> yoursettings.txt
-echo "IC ratio: $ICratio_1" >> yoursettings.txt
-echo "Correction factor: $correctionfactor_1" >> yoursettings.txt
-echo "Reversed correction: $reversedcorrection" >> yoursettings.txt
-echo "Current BG: $addBG_1" >> yoursettings.txt
-echo "Carbohydrate consumption: $carb_intake_1" >> yoursettings.txt
-echo "Current meal IOB: $mealIOB_1" >> yoursettings.txt
-echo "Current correction IOB: $correctionIOB_1" >> yoursettings.txt
+echo "Target BG: $TARGETBG" >> yoursettings.txt
+echo "Minimum BG: $MINBG" >> yoursettings.txt
+echo "Correct above BG: $CORRECT_ABOVE_BG" >> yoursettings.txt
+echo "IC ratio: $ICRATIO" >> yoursettings.txt
+echo "Correction factor: $CORRECTIONFACTOR" >> yoursettings.txt
+echo "Reversed correction: $REVERSEDCORRECTION" >> yoursettings.txt
+echo "Current BG: $CURRENTBG" >> yoursettings.txt
+echo "Carbohydrate consumption: $CURRENTCARB" >> yoursettings.txt
+echo "Current meal IOB: $CURRENTIOB_MEAL" >> yoursettings.txt
+echo "Current correction IOB: $CURRENTIOB_CORRECTION" >> yoursettings.txt
 
 #ehi
 cat yoursettings.txt
@@ -154,32 +152,10 @@ echo 'BASH Bolus Calculator Simulator'
 echo 'v1.09'
 echo '...'
 echo ''
-perl -lne 'print "$1" if /Target BG: (.*)/' yoursettings.txt > setting1.txt
-perl -lne 'print "$1" if /Minimum BG: (.*)/' yoursettings.txt > setting2.txt
-perl -lne 'print "$1" if /Correct above BG: (.*)/' yoursettings.txt > correct_above_bg.txt
-perl -lne 'print "$1" if /IC ratio: (.*)/' yoursettings.txt > setting3.txt
-perl -lne 'print "$1" if /Correction factor: (.*)/' yoursettings.txt > setting4.txt
-perl -lne 'print "$1" if /Reversed correction: (.*)/' yoursettings.txt > setting5.txt
-perl -lne 'print "$1" if /Current BG: (.*)/' yoursettings.txt > addBG.txt
-perl -lne 'print "$1" if /Carbohydrate consumption: (.*)/' yoursettings.txt > addCARB.txt
-perl -lne 'print "$1" if /Current meal IOB: (.*)/' yoursettings.txt > addIOB_meal.txt
-perl -lne 'print "$1" if /Current correction IOB: (.*)/' yoursettings.txt > addIOB_correction.txt
 echo 'your settings are loaded'
 echo ''
 echo '****************************************************************************'
 
-#new variables
-ON=$(<on.txt)
-TARGETBG=$(<setting1.txt)
-MINBG=$(<setting2.txt)
-CORRECT_ABOVE_BG=$(<correct_above_bg.txt)
-ICRATIO=$(<setting3.txt)
-CORRECTIONFACTOR=$(<setting4.txt)
-REVERSEDCORRECTION=$(<setting5.txt)
-CURRENTBG=$(<addBG.txt)
-CURRENTCARB=$(<addCARB.txt)
-CURRENTIOB_MEAL=$(<addIOB_meal.txt)
-CURRENTIOB_CORRECTION=$(<addIOB_correction.txt)
 
 #total IOB
 calc -d "$CURRENTIOB_MEAL + $CURRENTIOB_CORRECTION" > totalIOB_space.txt
