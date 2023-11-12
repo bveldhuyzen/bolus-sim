@@ -270,7 +270,7 @@ else
 echo '0' > currentbg_lt_targetbg.txt
 fi
 
-if "$REVERSEDCORRECTION = 1" | bc -l | grep -eq 1
+if echo "$REVERSEDCORRECTION = 1" | bc -l | grep -eq 1
 then
 echo '1' > reversedcorrection_eq_one.txt
 else
@@ -279,21 +279,21 @@ fi
 
 #for correction bolus etc.
 
-if "$CURRENTBG > $TARGETBG" | bc -l | grep -eq 1
+if echo "$CURRENTBG > $TARGETBG" | bc -l | grep -eq 1
 then
 echo '1' > currentbg_gt_targetbg.txt
 else
 echo '0' > currentbg_gt_targetbg.txt
 fi
 
-if "$CURRENTCARB = 0" | bc -l | grep -eq 1
+if echo "$CURRENTCARB = 0" | bc -l | grep -eq 1
 then
 echo '1' > currentcarb_eq_zero.txt
 else
 echo '0' > currentcarb_eq_zero.txt
 fi
 
-if "$CURRENTBG > $CORRECT_ABOVE_BG" | bc -l | grep -eq 1
+if echo "$CURRENTBG > $CORRECT_ABOVE_BG" | bc -l | grep -eq 1
 then
 echo '1' > currentbg_gt_correctabovebg.txt
 else
