@@ -363,7 +363,7 @@ echo '____________________________________________________________'
 
 #visual presentation
 echo 'MEAL BOLUS (just a meal bolus)'
-if [[ $CURRENTBG_GE_MINBG -eq 1 ]] && [[ $CURRENTBG_EQ_TARGETBG -eq 1 ]] && [[ $CURRENTCARB_GT_ZERO -eq 1 ]] 
+if [[ $CURRENTBG_GE_MINBG = 1 ]] && [[ $CURRENTBG_EQ_TARGETBG = 1 ]] && [[ $CURRENTCARB_GT_ZERO = 1 ]] 
 then
 echo ''
 cat yoursettings.txt > mealbolus_report.txt
@@ -388,7 +388,7 @@ echo '______________________________________________________________________'
 
 
 echo 'MEAL BOLUS + reversed correction'
-if [[ $CURRENTCARB_GT_ZERO -eq 1 ]] && [[ $CURRENTBG_GE_MINBG -eq 1 ]] && [[ $CURRENTBG_LT_TARGETBG -eq 1 ]] && [[ $REVERSEDCORRECTION_EQ_ONE -eq 1 ]] && [[ $TOTALIOB_GT_ZERO -eq 0 ]]
+if [[ $CURRENTCARB_GT_ZERO = 1 ]] && [[ $CURRENTBG_GE_MINBG = 1 ]] && [[ $CURRENTBG_LT_TARGETBG = 1 ]] && [[ $REVERSEDCORRECTION_EQ_ONE = 1 ]] && [[ $TOTALIOB_GT_ZERO = 0 ]]
 then
 echo ''
 cat yoursettings.txt > reversedmealbolus_report.txt
@@ -420,7 +420,7 @@ echo '______________________________________________________________________'
 
 
 echo 'MEAL BOLUS + reversed correction adjusted for IOB'
-if [[ $CURRENTCARB_GT_ZERO -eq 1 ]] && [[ $CURRENTBG_GE_MINBG -eq 1 ]] && [[ $CURRENTBG_LT_TARGETBG -eq 1 ]] && [[ $REVERSEDCORRECTION_EQ_ONE -eq 1 ]] && [[ $TOTALIOB_GT_ZERO -eq 1 ]]
+if [[ $CURRENTCARB_GT_ZERO = 1 ]] && [[ $CURRENTBG_GE_MINBG = 1 ]] && [[ $CURRENTBG_LT_TARGETBG = 1 ]] && [[ $REVERSEDCORRECTION_EQ_ONE = 1 ]] && [[ $TOTALIOB_GT_ZERO = 1 ]]
 then
 echo ''
 cat yoursettings.txt > reversedmealbolus_iob_report.txt
@@ -452,7 +452,7 @@ echo '______________________________________________________________________'
 
 
 echo 'CORRECTION BOLUS no IOB entry'
-if [[ $CURRENTBG_GT_TARGETBG -eq 1 ]] && [[ $CURRENTCARB_EQ_ZERO -eq 1 ]] && [[ $TOTALIOB_GT_ZERO -eq 0 ]] && [[ $CURRENTBG_GE_MINBG -eq 1 ]] && [[ $CURRENTBG_GT_CORRECTABOVEBG -eq 1 ]]
+if [[ $CURRENTBG_GT_TARGETBG = 1 ]] && [[ $CURRENTCARB_EQ_ZERO = 1 ]] && [[ $TOTALIOB_GT_ZERO = 0 ]] && [[ $CURRENTBG_GE_MINBG = 1 ]] && [[ $CURRENTBG_GT_CORRECTABOVEBG = 1 ]]
 then
 echo ''
 cat yoursettings.txt > correctionbolus_report.txt
@@ -477,7 +477,7 @@ echo '______________________________________________________________________'
 
 
 echo 'CORRECTION BOLUS recalculated for IOB'
-if [[ $CURRENTBG_GT_TARGETBG -eq 1 ]] && [[ $CURRENTCARB_EQ_ZERO -eq 1 ]] && [[ $TOTALIOB_GT_ZERO -eq 1 ]] && [[ $CURRENTBG_GE_MINBG -eq 1 ]] && [[ $CORRECTIONBOLUSMINUSIOB_GT_ZERO -eq 1 ]] && [[ $CURRENTBG_GT_CORRECTABOVEBG -eq 1 ]]
+if [[ $CURRENTBG_GT_TARGETBG = 1 ]] && [[ $CURRENTCARB_EQ_ZERO = 1 ]] && [[ $TOTALIOB_GT_ZERO = 1 ]] && [[ $CURRENTBG_GE_MINBG = 1 ]] && [[ $CORRECTIONBOLUSMINUSIOB_GT_ZERO = 1 ]] && [[ $CURRENTBG_GT_CORRECTABOVEBG = 1 ]]
 then
 echo ''
 cat yoursettings.txt > correctionbolus_IOB_report.txt
@@ -503,7 +503,7 @@ echo 'Unavailable'
 echo 'Unavailable' > no_correction_bolus_iob.txt
 fi
 
-if [[ $CURRENTBG_GT_TARGETBG -eq 1 ]] && [[ $CURRENTCARB_EQ_ZERO -eq 1 ]] && [[ $TOTALIOB_GT_ZERO -eq 1 ]] && [[ $CURRENTBG_GE_MINBG -eq 1 ]] && [[ $CORRECTIONBOLUSMINUSIOB_GT_ZERO -eq 0 ]]
+if [[ $CURRENTBG_GT_TARGETBG = 1 ]] && [[ $CURRENTCARB_EQ_ZERO = 1 ]] && [[ $TOTALIOB_GT_ZERO = 1 ]] && [[ $CURRENTBG_GE_MINBG = 1 ]] && [[ $CORRECTIONBOLUSMINUSIOB_GT_ZERO = 0 ]]
 then
 echo 'suggestion is zero or negative'
 fi
@@ -511,7 +511,7 @@ echo '______________________________________________________________________'
 
 
 echo 'MEAL BOLUS + CORRECTION BOLUS no IOB entry'
-if [[ $TOTALIOB_GT_ZERO -eq 0 ]] && [[ $CURRENTBG_GT_TARGETBG -eq 1 ]] && [[ $CURRENTCARB_GT_ZERO -eq 1 ]] && [[ $CURRENTBG_GE_MINBG -eq 1 ]] && [[ $CURRENTBG_GT_CORRECTABOVEBG -eq 1 ]]
+if [[ $TOTALIOB_GT_ZERO = 0 ]] && [[ $CURRENTBG_GT_TARGETBG = 1 ]] && [[ $CURRENTCARB_GT_ZERO = 1 ]] && [[ $CURRENTBG_GE_MINBG = 1 ]] && [[ $CURRENTBG_GT_CORRECTABOVEBG = 1 ]]
 then
 echo '' > totalboluswithoutIOB.txt
 cat yoursettings.txt >> totalboluswithoutIOB.txt
@@ -544,7 +544,7 @@ echo '______________________________________________________________________'
 
 
 echo 'MEAL BOLUS + CORRECTION BOLUS recalculated for IOB'
-if [[ $TOTALIOB_GT_ZERO -eq 1 ]] && [[ $CURRENTBG_GT_TARGETBG -eq 1 ]] && [[ $CURRENTCARB_GT_ZERO -eq 1 ]] && [[ $CURRENTBG_GE_MINBG -eq 1 ]] && [[ $CURRENTBG_GT_CORRECTABOVEBG -eq 1 ]]
+if [[ $TOTALIOB_GT_ZERO = 1 ]] && [[ $CURRENTBG_GT_TARGETBG = 1 ]] && [[ $CURRENTCARB_GT_ZERO = 1 ]] && [[ $CURRENTBG_GE_MINBG = 1 ]] && [[ $CURRENTBG_GT_CORRECTABOVEBG = 1 ]]
 then
 echo ''
 cat yoursettings.txt > correctionbolus_IOB_combo_report.txt
@@ -603,7 +603,7 @@ echo 'Unavailable' >> unavailable.txt
 unavailable="unavailable.txt"
 
 echo 'MEAL BOLUS (just a meal bolus)'
-if cmp -s "$unavailable" "$unavailable_list" && [[ $CURRENTCARB_GT_ZERO -eq 1 ]]  && [[ $CURRENTBG_GE_MINBG -eq 1 ]]
+if cmp -s "$unavailable" "$unavailable_list" && [[ $CURRENTCARB_GT_ZERO = 1 ]]  && [[ $CURRENTBG_GE_MINBG = 1 ]]
 then
 echo ''
 cat yoursettings.txt > mealbolus_report_new_testrun.txt
