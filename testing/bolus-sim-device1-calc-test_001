@@ -240,7 +240,7 @@ mealbolus_final=$(<mealbolus_final.txt)
 ##bolus rule sets (1=true 0=false)
 #for meal bolus etc.
 
-if [[ $CURRENTBG > $MINBG ]] || [[ $CURRENTBG = $MINBG ]]
+if [[ $CURRENTBG > $MINBG ]]
 then
 echo '1' > currentbg_ge_minbg.txt
 else
