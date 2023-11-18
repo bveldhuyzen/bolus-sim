@@ -1,0 +1,594 @@
+#!/bin/bash
+#v1.099
+#Stand-alone bolus calculator simulator for $DEVICE1 - high accuracy mode
+#
+#https://www.boluscalculators.com
+#repository [at] boluscalculators dot com
+#2021
+#
+
+echo '*************************************************************************************'
+echo ''
+echo 'BASH Bolus Calculator Simulator - looping mode'
+echo '...'
+echo '*************************************************************************************'
+echo ''
+
+#if temp dir is still available, then remove temp dir
+#bash -c '[ -d temp_data_sim ] && rm -rf temp_data_sim'
+
+#removed 10000
+
+#if reversed correction is on ("1"), then it matches this file content
+echo '1' > on.txt
+
+
+perl -lne 'print "$1" if /Target BG: (.*)/' yoursettings.txt > setting1_entry_1.txt
+perl -lne 'print "$1" if /Minimum BG: (.*)/' yoursettings.txt > setting2_entry_1.txt
+perl -lne 'print "$1" if /Correct above BG: (.*)/' yoursettings.txt > correct_above_entry_1.txt
+perl -lne 'print "$1" if /IC ratio: (.*)/' yoursettings.txt > setting3_entry_1.txt
+perl -lne 'print "$1" if /Correction factor: (.*)/' yoursettings.txt > setting4_entry_1.txt
+perl -lne 'print "$1" if /Reversed correction: (.*)/' yoursettings.txt > setting5_entry.txt
+perl -lne 'print "$1" if /Current BG: (.*)/' yoursettings.txt > addBG_entry_1.txt
+perl -lne 'print "$1" if /Carbohydrate consumption: (.*)/' yoursettings.txt > addCARB_entry_1.txt
+perl -lne 'print "$1" if /Current meal IOB: (.*)/' yoursettings.txt > addIOB_meal_entry_1.txt
+perl -lne 'print "$1" if /Current correction IOB: (.*)/' yoursettings.txt > addIOB_correction_entry_1.txt
+
+ON=$(<on.txt)
+MINBG=$(<setting2_entry_1.txt)
+TARGETBG=$(<setting1_entry_1.txt)
+CORRECT_ABOVE_BG=$(<correct_above_entry_1.txt)
+ICRATIO=$(<setting3_entry_1.txt)
+CORRECTIONFACTOR=$(<setting4_entry_1.txt)
+REVERSEDCORRECTION=$(<setting5_entry.txt)
+CURRENTBG=$(<addBG_entry_1.txt)
+CURRENTCARB=$(<addCARB_entry_1.txt)
+CURRENTIOB_MEAL=$(<addIOB_meal_entry_1.txt)
+CURRENTIOB_CORRECTION=$(<addIOB_correction_entry_1.txt)
+
+
+#create new temp dir and cp and cd to dir
+#mkdir 'temp_data_sim'
+#cp temp_data_sim
+#cd temp_data_sim
+
+
+
+#ehi
+#cat yoursettings.txt
+#echo #'______________________________________________________________________'
+
+#read -p 'Confirm entries, then hit enter'
+
+###inserting here
+#lightweight bolus calculator
+
+#the lines below print each of the user settings to a separate text file
+#echo #'____________________________________________________________'
+echo 'BASH Bolus Calculator Simulator'
+echo 'v1.099'
+#echo '...'
+#echo ''
+#echo 'your settings are loaded'
+#echo ''
+#echo '' '****************************************************************************'
+
+
+#total IOB
+calc -d "$CURRENTIOB_MEAL + $CURRENTIOB_CORRECTION" > totalIOB_space.txt
+sed -e 's/^[\t]*//' totalIOB_space.txt > totalIOB.txt
+TOTALIOB=$(<totalIOB.txt)
+
+
+#MEAL BOLUS CALCULATION
+calc -d "$CURRENTCARB / $ICRATIO" > mealbolus_space.txt
+sed -e 's/^[\t]*//' mealbolus_space.txt > mealbolus.txt
+MEALBOLUS=$(<mealbolus.txt)
+
+
+#REVERSED CORRECTION MEAL BOLUS step 1; output is the difference between current BG and target BG'
+calc -d "$CURRENTBG - $TARGETBG" > tempfile1_space.txt
+sed -e 's/^[\t]*//' tempfile1_space.txt > tempfile1_negative.txt
+tr -d \- < tempfile1_negative.txt > tempfile1.txt
+REVERSEDKLOOF=$(<tempfile1.txt)
+#REVERSED CORRECTION MEAL BOLUS step 2; output is the BG to reverse correct for (output from step 1), divided by the correction factor, which results in the amount of insulin to be deducted from the meal bolus
+calc -d "$REVERSEDKLOOF / $CORRECTIONFACTOR" > tempfile2.txt
+#tr -d \~ < tempfile2_1.txt > tempfile2.txt
+REVERSEDKLOOF10000=$(<tempfile2.txt)
+#REVERSED CORRECTION MEAL BOLUS step 3; meal bolus minus the output of step 2
+calc -d "$MEALBOLUS - $REVERSEDKLOOF10000" > mealbolus_reversed.txt
+awk '$1<0 {$1=0} 1' mealbolus_reversed.txt > tempfile3_space.txt
+sed -e 's/^[\t]*//' tempfile3_space.txt > tempfile3.txt
+CORRECTIONBOLUSREVERSED=$(<tempfile3.txt)
+
+
+#REVERSED CORRECTION MEAL BOLUS adjusted for correction IOB; 
+calc -d "$MEALBOLUS - $CURRENTIOB_CORRECTION" > mealbolus_minusIOBcorrection_space.txt
+sed -e 's/^[\t]*//' mealbolus_minusIOBcorrection_space.txt > mealbolus_minusIOBcorrection_posneg.txt
+awk '$1<0 {$1=0} 1' mealbolus_minusIOBcorrection_posneg.txt > mealbolus_minusIOBcorrection_pos.txt
+MEALBOLUS_minus_IOBCORRECTION=$(<mealbolus_minusIOBcorrection_pos.txt)
+
+calc -d "$MEALBOLUS_minus_IOBCORRECTION - $REVERSEDKLOOF10000" > reversedcorrectionmealbolus_IOB_space.txt
+sed -e 's/^[\t]*//' reversedcorrectionmealbolus_IOB_space.txt > reversedcorrectionmealbolus_IOB_posneg.txt
+awk '$1<0 {$1=0} 1' reversedcorrectionmealbolus_IOB_posneg.txt > reversedcorrectionmealbolus_IOB_pos.txt
+CORRECTIONBOLUSREVERSED_IOB=$(<reversedcorrectionmealbolus_IOB_pos.txt)
+
+
+#CORRECTION BOLUS step 1; output is the difference between current BG and target BG
+calc -d "$CURRENTBG - $TARGETBG" > bgkloof.txt
+BGKLOOF=$(<bgkloof.txt)
+#CORRECTION BOLUS step 2; the difference in BG divided by the correction factor, which results in the correction bolus
+calc -d "$BGKLOOF / $CORRECTIONFACTOR" > correctionbolus_space.txt
+sed -e 's/^[\t]*//' correctionbolus_space.txt > correctionbolus_posneg.txt
+awk '$1<0 {$1=0} 1' correctionbolus_posneg.txt > correctionbolus_test.txt
+CORRECTIONBOLUS=$(<correctionbolus_test.txt)
+
+
+#CORRECTION BOLUS RECALCULATED FOR IOB ENTRIES; correction bolus minus meal IOB
+calc -d "$CORRECTIONBOLUS - $CURRENTIOB_MEAL" > correctionbolusminusIOBmeal.txt
+awk '$1<0 {$1=0} 1' correctionbolusminusIOBmeal.txt > tempfile.txt
+correctionbolusminusIOBmeal=$(<tempfile.txt)
+#calculation of IOB leftover from meal IOB
+calc -d "$CURRENTIOB_CORRECTION - $correctionbolusminusIOBmeal" > IOB_leftover_posneg.txt
+awk '$1<0 {$1=0} 1' IOB_leftover_posneg.txt > IOB_leftover_pos_space.txt
+sed -e 's/^[\t]*//' IOB_leftover_pos_space.txt> IOB_leftover.txt
+IOB_leftover=$(<IOB_leftover.txt)
+#correctionbolusminusIOBmeal minus correction IOB
+calc -d "$correctionbolusminusIOBmeal - $CURRENTIOB_CORRECTION" > correctionbolusminusIOB_posneg.txt
+awk '$1<0 {$1=0} 1' correctionbolusminusIOB_posneg.txt > correctionbolusminusIOB_neg.txt
+tr -d \- < correctionbolusminusIOB_neg.txt > correctionbolusminusIOB.txt
+correctionbolusminusIOB=$(<correctionbolusminusIOB.txt)
+
+
+#MEAL BOLUS AND CORRECTION BOLUS (NO IOB)'
+calc -d "$MEALBOLUS + $CORRECTIONBOLUS" > totalboluswithoutIOB_space.txt
+sed -e 's/^[\t]*//' totalboluswithoutIOB_space.txt > totalboluswithoutIOB.txt
+#tr -d \~ < totalboluswithoutIOB.txt > totalboluswithoutIOB_positive.txt
+totalboluswithoutIOB=$(<totalboluswithoutIOB.txt)
+
+
+#MEAL BOLUS adjusted for IOB leftover (if correction + meal bolus + IOB)
+calc -d "$MEALBOLUS - $IOB_leftover" > mealbolusminusIOB_1.txt
+awk '$1<0 {$1=0} 1' mealbolusminusIOB_1.txt > mealbolusminusIOB.txt
+sed -e 's/^[\t]*//' mealbolusminusIOB.txt > mealbolus_final.txt
+mealbolus_final=$(<mealbolus_final.txt)
+
+
+##bolus rule sets (1=true 0=false)
+#for meal bolus etc.
+
+if echo "$CURRENTBG > $MINBG" | bc -l | grep -q 1 || echo "$CURRENTBG == $MINBG" | bc -l | grep -q 1
+then
+echo '1' > currentbg_ge_minbg.txt
+else
+echo '0' > currentbg_ge_minbg.txt
+fi
+
+if echo "$CURRENTBG == $TARGETBG" | bc -l | grep -q 1
+then
+echo '1' > currentbg_eq_targetbg.txt
+else
+echo '0' > currentbg_eq_targetbg.txt
+fi
+
+if echo "$CURRENTCARB > 0" | bc -l | grep -q 1
+then
+echo '1' > currentcarb_gt_zero.txt
+else
+echo '0' > currentcarb_gt_zero.txt
+fi
+
+#for reversed correction
+
+if echo "$CURRENTBG < $TARGETBG" | bc -l | grep -q 1
+then
+echo '1' > currentbg_lt_targetbg.txt
+else
+echo '0' > currentbg_lt_targetbg.txt
+fi
+
+if [[ $REVERSEDCORRECTION -eq 1 ]]
+then
+echo '1' > reversedcorrection_eq_one.txt
+else
+echo '0' > reversedcorrection_eq_one.txt
+fi
+
+#for correction bolus etc.
+
+if echo "$CURRENTBG > $TARGETBG" | bc -l | grep -q 1
+then
+echo '1' > currentbg_gt_targetbg.txt
+else
+echo '0' > currentbg_gt_targetbg.txt
+fi
+
+if echo "$CURRENTCARB == 0" | bc -l | grep -q 1
+then
+echo '1' > currentcarb_eq_zero.txt
+else
+echo '0' > currentcarb_eq_zero.txt
+fi
+
+if echo "$CURRENTBG > $CORRECT_ABOVE_BG" | bc -l | grep -q 1
+then
+echo '1' > currentbg_gt_correctabovebg.txt
+else
+echo '0' > currentbg_gt_correctabovebg.txt
+fi
+
+
+#for IOB if_then
+calc -d "$CURRENTIOB_MEAL + $CURRENTIOB_CORRECTION" > totalIOB_space.txt
+sed -e 's/^[\t]*//' totalIOB_space.txt > totalIOB.txt
+TOTALIOB=$(<totalIOB.txt)
+
+awk '$1>0 {$1=1} 1' totalIOB.txt > total_iob_is_positive_for_if_then.txt
+TOTALIOB_GT_ZERO=$(<total_iob_is_positive_for_if_then.txt)
+
+awk '$1>0 {$1=1} 1' addIOB_meal_entry_1.txt > currentiobmeal_is_positive_for_if_then.txt
+CURRENTIOBMEAL_GT_ZERO=$(<currentiobmeal_is_positive_for_if_then.txt)
+
+awk '$1>0 {$1=1} 1' addIOB_correction_entry_1.txt > currentiobcorrection_is_positive_for_if_then.txt
+CURRENTIOBCORRECTION_GT_ZERO=$(<currentiobcorrection_is_positive_for_if_then.txt)
+
+
+#for correction bolus minus IOB if_then
+
+awk '$1>0 {$1=1} 1' correctionbolusminusIOB.txt > correctionbolusminusiob_is_positive_for_if_then.txt
+CORRECTIONBOLUSMINUSIOB_GT_ZERO=$(<correctionbolusminusiob_is_positive_for_if_then.txt)
+
+
+#your meal IOB is:
+if [[ $CURRENTIOBMEAL_GT_ZERO -eq 1 ]]
+then
+echo 'you still have ' > meal_IOB_alert_add.txt
+cat addIOB_meal_entry_1.txt >> meal_IOB_alert_add.txt
+echo ' units of insulin on board (from previous meal bolus)' >> meal_IOB_alert_add.txt
+cat meal_IOB_alert_add.txt | tr -d '\n' > meal_IOB_alert.txt
+echo '' >> meal_IOB_alert.txt
+cat meal_IOB_alert.txt
+fi
+
+#your correction IOB is:
+if [[ $CURRENTIOBCORRECTION_GT_ZERO -eq 1 ]]
+then
+echo 'you still have ' > correction_IOB_alert_add.txt.txt
+cat addIOB_correction_entry_1.txt >> correction_IOB_alert_add.txt
+echo ' units of insulin on board (from previous correction)' >> correction_IOB_alert_add.txt
+cat correction_IOB_alert_add.txt | tr -d '\n' > correction_IOB_alert.txt
+echo '' >> correction_IOB_alert.txt
+cat correction_IOB_alert.txt
+fi
+echo '****************************************************************************'
+echo ''
+
+
+CURRENTBG_GE_MINBG=$(<currentbg_ge_minbg.txt)
+CURRENTBG_EQ_TARGETBG=$(<currentbg_eq_targetbg.txt)
+CURRENTCARB_GT_ZERO=$(<currentcarb_gt_zero.txt)
+CURRENTBG_LT_TARGETBG=$(<currentbg_lt_targetbg.txt)
+REVERSEDCORRECTION_EQ_ONE=$(<reversedcorrection_eq_one.txt)
+CURRENTBG_GT_TARGETBG=$(<currentbg_gt_targetbg.txt)
+CURRENTCARB_EQ_ZERO=$(<currentcarb_eq_zero.txt)
+CURRENTBG_GT_CORRECTABOVEBG=$(<currentbg_gt_correctabovebg.txt)
+
+
+#visual presentation
+echo 'Loaded calculators...'
+echo '____________________________________________________________'
+
+#visual presentation
+echo 'MEAL BOLUS (just a meal bolus)'
+if [[ $CURRENTBG_GE_MINBG -eq 1 ]] && [[ $CURRENTBG_EQ_TARGETBG -eq 1 ]] && [[ $CURRENTCARB_GT_ZERO -eq 1 ]]
+then
+echo ''
+cat yoursettings.txt > mealbolus_report.txt
+echo '' >> mealbolus_report.txt
+echo 'Your meal bolus is calulated as followed:' >> mealbolus_report.txt
+echo '' >> mealbolus_report.txt
+echo 'Carbohydrate consumption / IC-ratio =' >> mealbolus_report.txt
+echo '' >> mealbolus_report.txt
+echo 'MEAL BOLUS' >> mealbolus_report.txt
+echo "$CURRENTCARB / $ICRATIO = $MEALBOLUS" >> mealbolus_report.txt
+echo '' >> mealbolus_report.txt
+echo 'TOTAL BOLUS SUGGESTION' >> mealbolus_report.txt
+echo "$MEALBOLUS units of insulin" >> mealbolus_report.txt
+echo '' >> mealbolus_report.txt
+cat mealbolus_report.txt
+echo 'Available' > no_mealbolus.txt
+else
+echo 'Unavailable'
+echo 'Unavailable' > no_mealbolus.txt
+fi
+echo '______________________________________________________________________'
+
+
+echo 'MEAL BOLUS + reversed correction'
+if [[ $CURRENTCARB_GT_ZERO -eq 1 ]] && [[ $CURRENTBG_GE_MINBG -eq 1 ]] && [[ $CURRENTBG_LT_TARGETBG -eq 1 ]] && [[ $REVERSEDCORRECTION_EQ_ONE -eq 1 ]] && [[ $TOTALIOB_GT_ZERO -eq 0 ]]
+then
+echo ''
+cat yoursettings.txt > reversedmealbolus_report.txt
+echo '' >> reversedmealbolus_report.txt
+echo 'Your meal bolus + reversed correction is calculated as followed:' >> reversedmealbolus_report.txt
+echo '' >> reversedmealbolus_report.txt
+echo 'mealbolus - ((target BG - current BG) / correction factor)' >> reversedmealbolus_report.txt
+echo '' >> reversedmealbolus_report.txt
+echo 'MEAL BOLUS' >> reversedmealbolus_report.txt
+echo "$CURRENTCARB / $ICRATIO = $MEALBOLUS" >> reversedmealbolus_report.txt
+echo '' >> reversedmealbolus_report.txt
+echo 'MEAL BOLUS reversed correction' >> reversedmealbolus_report.txt
+echo "$MEALBOLUS - (($TARGETBG - $CURRENTBG) / $CORRECTIONFACTOR) = $CORRECTIONBOLUSREVERSED" >> reversedmealbolus_report.txt
+echo '' >> reversedmealbolus_report.txt
+echo 'TOTAL BOLUS SUGGESTION' >> reversedmealbolus_report.txt
+echo "$CORRECTIONBOLUSREVERSED units of insulin" >> reversedmealbolus_report.txt
+echo '' >> reversedmealbolus_report.txt
+cat reversedmealbolus_report.txt
+echo 'Available' > no_meal_reversed_correction_bolus.txt
+else
+echo 'Unavailable'
+echo 'Unavailable' > no_meal_reversed_correction_bolus.txt
+fi
+echo '______________________________________________________________________'
+
+
+
+
+
+
+echo 'MEAL BOLUS + reversed correction adjusted for IOB'
+if [[ $CURRENTCARB_GT_ZERO -eq 1 ]] && [[ $CURRENTBG_GE_MINBG -eq 1 ]] && [[ $CURRENTBG_LT_TARGETBG -eq 1 ]] && [[ $REVERSEDCORRECTION_EQ_ONE -eq 1 ]] && [[ $TOTALIOB_GT_ZERO -eq 1 ]]
+then
+echo ''
+cat yoursettings.txt > reversedmealbolus_iob_report.txt
+echo '' >> reversedmealbolus_iob_report.txt
+echo 'Your meal bolus + reversed correction adjusted for IOB is calculated as followed:' >> reversedmealbolus_iob_report.txt
+echo '' >> reversedmealbolus_iob_report.txt
+echo '(mealbolus - IOB correction ) - ((target BG - current BG) / correction factor)' >> reversedmealbolus_iob_report.txt
+echo '' >> reversedmealbolus_iob_report.txt
+echo 'MEAL BOLUS' >> reversedmealbolus_iob_report.txt
+echo "$CURRENTCARB / $ICRATIO = $MEALBOLUS" >> reversedmealbolus_iob_report.txt
+echo '' >> reversedmealbolus_iob_report.txt
+echo 'MEAL BOLUS reversed correction' >> reversedmealbolus_iob_report.txt
+echo "($MEALBOLUS - $CURRENTIOB_CORRECTION) - (($TARGETBG - $CURRENTBG) / $CORRECTIONFACTOR) = $CORRECTIONBOLUSREVERSED_IOB" >> reversedmealbolus_iob_report.txt
+echo '' >> reversedmealbolus_iob_report.txt
+echo 'TOTAL BOLUS SUGGESTION' >> reversedmealbolus_iob_report.txt
+echo "$CORRECTIONBOLUSREVERSED_IOB units of insulin" >> reversedmealbolus_iob_report.txt
+echo '' >> reversedmealbolus_iob_report.txt
+cat reversedmealbolus_iob_report.txt
+echo 'Available' > no_meal_reversed_correction_bolus_iob.txt
+else
+echo 'Unavailable'
+echo 'Unavailable' > no_meal_reversed_correction_bolus_iob.txt
+fi
+echo '______________________________________________________________________'
+
+
+
+
+
+
+echo 'CORRECTION BOLUS no IOB entry'
+if [[ $CURRENTBG_GT_TARGETBG -eq 1 ]] && [[ $CURRENTCARB_EQ_ZERO -eq 1 ]] && [[ $TOTALIOB_GT_ZERO -eq 0 ]] && [[ $CURRENTBG_GE_MINBG -eq 1 ]] && [[ $CURRENTBG_GT_CORRECTABOVEBG -eq 1 ]]
+then
+echo ''
+cat yoursettings.txt > correctionbolus_report.txt
+echo '' >> correctionbolus_report.txt
+echo 'Your correction bolus (no IOB) is calculated as followed:' >> correctionbolus_report.txt
+echo '' >> correctionbolus_report.txt
+echo '(current BG - target BG) / correction factor =' >> correctionbolus_report.txt
+echo '' >> correctionbolus_report.txt
+echo 'CORRECTION BOLUS' >> correctionbolus_report.txt
+echo "($CURRENTBG - $TARGETBG) / $CORRECTIONFACTOR = $CORRECTIONBOLUS" >> correctionbolus_report.txt
+echo '' >> correctionbolus_report.txt
+echo 'TOTAL BOLUS SUGGESTION' >> correctionbolus_report.txt
+echo "$CORRECTIONBOLUS units of insulin" >> correctionbolus_report.txt
+echo '' >> correctionbolus_report.txt
+cat correctionbolus_report.txt
+echo 'Available' > no_correction_bolus.txt
+else
+echo 'Unavailable'
+echo 'Unavailable' > no_correction_bolus.txt
+fi
+echo '______________________________________________________________________'
+
+
+echo 'CORRECTION BOLUS recalculated for IOB'
+if [[ $CURRENTBG_GT_TARGETBG -eq 1 ]] && [[ $CURRENTCARB_EQ_ZERO -eq 1 ]] && [[ $TOTALIOB_GT_ZERO -eq 1 ]] && [[ $CURRENTBG_GE_MINBG -eq 1 ]] && [[ $CORRECTIONBOLUSMINUSIOB_GT_ZERO -eq 1 ]] && [[ $CURRENTBG_GT_CORRECTABOVEBG -eq 1 ]]
+then
+echo ''
+cat yoursettings.txt > correctionbolus_IOB_report.txt
+echo '' >> correctionbolus_IOB_report.txt
+echo 'Your correction bolus (adjusted for IOB) is calculated as followed:' >> correctionbolus_IOB_report.txt
+echo '' >> correctionbolus_IOB_report.txt
+echo 'Correction bolus - meal IOB - correction IOB' >> correctionbolus_IOB_report.txt
+echo '' >> correctionbolus_IOB_report.txt
+echo 'CORRECTION BOLUS' >> correctionbolus_IOB_report.txt
+echo '((current BG - target BG) / correction factor) =' >> correctionbolus_IOB_report.txt
+echo "($CURRENTBG - $TARGETBG) / $CORRECTIONFACTOR = $CORRECTIONBOLUS" >> correctionbolus_IOB_report.txt
+echo '' >> correctionbolus_IOB_report.txt
+echo 'CORRECTION BOLUS adjusted for IOB' >> correctionbolus_IOB_report.txt
+echo "$CORRECTIONBOLUS - $CURRENTIOB_MEAL - $CURRENTIOB_CORRECTION = $correctionbolusminusIOB" >> correctionbolus_IOB_report.txt
+echo '' >> correctionbolus_IOB_report.txt
+echo 'TOTAL BOLUS SUGGESTION' >> correctionbolus_IOB_report.txt
+echo "$correctionbolusminusIOB units of insulin" >> correctionbolus_IOB_report.txt
+echo '' >> correctionbolus_IOB_report.txt
+cat correctionbolus_IOB_report.txt
+echo 'Available' > no_correction_bolus_iob.txt
+else
+echo 'Unavailable'
+echo 'Unavailable' > no_correction_bolus_iob.txt
+fi
+
+if [[ $CURRENTBG_GT_TARGETBG -eq 1 ]] && [[ $CURRENTCARB_EQ_ZERO -eq 1 ]] && [[ $TOTALIOB_GT_ZERO -eq 1 ]] && [[ $CURRENTBG_GE_MINBG -eq 1 ]] && [[ $CORRECTIONBOLUSMINUSIOB_GT_ZERO -eq 0 ]]
+then
+echo 'suggestion is zero or negative'
+fi
+echo '______________________________________________________________________'
+
+
+echo 'MEAL BOLUS + CORRECTION BOLUS no IOB entry'
+if [[ $TOTALIOB_GT_ZERO -eq 0 ]] && [[ $CURRENTBG_GT_TARGETBG -eq 1 ]] && [[ $CURRENTCARB_GT_ZERO -eq 1 ]] && [[ $CURRENTBG_GE_MINBG -eq 1 ]] && [[ $CURRENTBG_GT_CORRECTABOVEBG -eq 1 ]]
+then
+echo '' > totalboluswithoutIOB.txt
+cat yoursettings.txt >> totalboluswithoutIOB.txt
+echo '' >> totalboluswithoutIOB.txt
+echo 'Your meal + correction bolus (no IOB) is calculated as followed:' >> totalboluswithoutIOB.txt
+echo '' >> totalboluswithoutIOB.txt
+echo 'Meal bolus + correction bolus' >> totalboluswithoutIOB.txt
+echo '' >> totalboluswithoutIOB.txt
+echo 'MEAL BOLUS' >> totalboluswithoutIOB.txt
+echo 'Carb intake / IC ratio =' >> totalboluswithoutIOB.txt
+echo "$CURRENTCARB / $ICRATIO = $MEALBOLUS units of insulin" >> totalboluswithoutIOB.txt
+echo '' >> totalboluswithoutIOB.txt
+echo 'CORRECTION BOLUS' >> totalboluswithoutIOB.txt
+echo '(current BG - target BG) / correction factor =' >> totalboluswithoutIOB.txt
+echo "($CURRENTBG - $TARGETBG) / $CORRECTIONFACTOR = $CORRECTIONBOLUS units of insulin" >> totalboluswithoutIOB.txt
+echo '' >> totalboluswithoutIOB.txt
+echo 'MEAL + CORRECTION BOLUS' >> totalboluswithoutIOB.txt
+echo "$MEALBOLUS + $CORRECTIONBOLUS = $totalboluswithoutIOB" >> totalboluswithoutIOB.txt
+echo ''  >> totalboluswithoutIOB.txt
+echo 'TOTAL BOLUS SUGGESTION'  >> totalboluswithoutIOB.txt
+echo "$totalboluswithoutIOB units of insulin"  >> totalboluswithoutIOB.txt
+echo '' >> totalboluswithoutIOB.txt
+cat totalboluswithoutIOB.txt
+echo 'Available' > no_meal_and_correction_bolus.txt
+else
+echo 'Unavailable'
+echo 'Unavailable' > no_meal_and_correction_bolus.txt
+fi
+echo '______________________________________________________________________'
+
+
+echo 'MEAL BOLUS + CORRECTION BOLUS recalculated for IOB'
+if [[ $TOTALIOB_GT_ZERO -eq 1 ]] && [[ $CURRENTBG_GT_TARGETBG -eq 1 ]] && [[ $CURRENTCARB_GT_ZERO -eq 1 ]] && [[ $CURRENTBG_GE_MINBG -eq 1 ]] && [[ $CURRENTBG_GT_CORRECTABOVEBG -eq 1 ]]
+then
+echo ''
+cat yoursettings.txt > correctionbolus_IOB_combo_report.txt
+echo'' >> correctionbolus_IOB_combo_report.txt
+echo 'Your meal and correction bolus (adjusted for IOB) is calculated as followed:' >> correctionbolus_IOB_combo_report.txt
+echo '' >> correctionbolus_IOB_combo_report.txt
+echo 'CORRECTION BOLUS' >> correctionbolus_IOB_combo_report.txt
+echo '((current BG - target BG) / correction factor) - meal IOB - correction IOB' >> correctionbolus_IOB_combo_report.txt
+echo "(($CURRENTBG - $TARGETBG) / $CORRECTIONFACTOR ) - $CURRENTIOB_MEAL - $CURRENTIOB_CORRECTION = $correctionbolusminusIOB units of insulin" >> correctionbolus_IOB_combo_report.txt
+echo '' >> correctionbolus_IOB_combo_report.txt
+
+echo 'MEAL BOLUS' >> correctionbolus_IOB_combo_report.txt
+echo '(Carbohydrate consumption / IC ratio) - leftover correction IOB' >> correctionbolus_IOB_combo_report.txt
+echo "($CURRENTCARB / $ICRATIO) - $IOB_leftover = $mealbolus_final units of insulin" >> correctionbolus_IOB_combo_report.txt
+echo '' >> correctionbolus_IOB_combo_report.txt
+
+calc -d "$correctionbolusminusIOB + $mealbolus_final" > FULLBOLUSCALC_space.txt
+sed -e 's/^[\t]*//' FULLBOLUSCALC_space.txt > FULLBOLUSCALC.txt
+FULLBOLUSCALC=$(<FULLBOLUSCALC.txt)
+echo "Your total bolus suggestion is $correctionbolusminusIOB + $mealbolus_final = $FULLBOLUSCALC units of insulin" >> correctionbolus_IOB_combo_report.txt
+echo '' >> correctionbolus_IOB_combo_report.txt
+cat correctionbolus_IOB_combo_report.txt
+echo 'Available' > no_meal_and_correction_bolus_iob.txt
+else
+echo 'Unavailable'
+echo 'Unavailable' > no_meal_and_correction_bolus_iob.txt
+fi
+echo '______________________________________________________________________'
+
+
+#final check for meal bolus option after other options are deemed unavailable
+no_mealbolus=$(<no_mealbolus.txt)
+no_correction_bolus=$(<no_correction_bolus.txt)
+no_correction_bolus_iob=$(<no_correction_bolus_iob.txt)
+no_meal_reversed_correction_bolus=$(<no_meal_reversed_correction_bolus.txt)
+no_meal_reversed_correction_bolus_iob=$(<no_meal_reversed_correction_bolus_iob.txt)
+no_meal_and_correction_bolus=$(<no_meal_and_correction_bolus.txt)
+no_meal_and_correction_bolus_iob=$(<no_meal_and_correction_bolus_iob.txt)
+
+echo "$no_mealbolus" > unavailable_list.txt
+echo "$no_correction_bolus" >> unavailable_list.txt
+echo "$no_correction_bolus_iob" >> unavailable_list.txt
+echo "$no_meal_reversed_correction_bolus" >> unavailable_list.txt
+echo "$no_meal_reversed_correction_bolus_iob" >> unavailable_list.txt
+echo "$no_meal_and_correction_bolus" >> unavailable_list.txt
+echo "$no_meal_and_correction_bolus_iob" >> unavailable_list.txt
+unavailable_list="unavailable_list.txt"
+
+echo 'Unavailable' > unavailable.txt
+echo 'Unavailable' >> unavailable.txt
+echo 'Unavailable' >> unavailable.txt
+echo 'Unavailable' >> unavailable.txt
+echo 'Unavailable' >> unavailable.txt
+echo 'Unavailable' >> unavailable.txt
+echo 'Unavailable' >> unavailable.txt
+unavailable="unavailable.txt"
+
+echo 'MEAL BOLUS (just a meal bolus)'
+if cmp -s "$unavailable" "$unavailable_list" && [[ $CURRENTCARB_GT_ZERO -eq 1 ]]  && [[ $CURRENTBG_GE_MINBG -eq 1 ]]
+then
+echo ''
+cat yoursettings.txt > mealbolus_report_new_testrun.txt
+echo '' >> mealbolus_report_new_testrun.txt
+echo 'Your meal bolus is calulated as followed:' >> mealbolus_report_new_testrun.txt
+echo '' >> mealbolus_report_new_testrun.txt
+echo 'Carbohydrate consumption / IC-ratio =' >> mealbolus_report_new_testrun.txt
+echo '' >> mealbolus_report_new_testrun.txt
+echo 'MEAL BOLUS' >> mealbolus_report_new_testrun.txt
+echo "$CURRENTCARB / $ICRATIO = $MEALBOLUS" >> mealbolus_report_new_testrun.txt
+echo '' >> mealbolus_report_new_testrun.txt
+echo 'TOTAL BOLUS SUGGESTION' >> mealbolus_report_new_testrun.txt
+echo "$MEALBOLUS units of insulin" >> mealbolus_report_new_testrun.txt
+echo '' >> mealbolus_report_new_testrun.txt
+cat mealbolus_report_new_testrun.txt
+else
+echo 'Unavailable'
+fi
+echo '______________________________________________________________________'
+
+
+
+#removal of temporary files
+#cd -
+#rm -rf temp_data_sim
+
+
+#
+#calc -d "$CURRENTCARB + 1" > newcarb_space.txt
+#sed -e 's/^[\t]*//' newcarb_space.txt > newcarb.txt
+#NEWCARB=$(<newcarb.txt)
+
+#calc -d "$CURRENTBG + 0.01" > newbg_space.txt
+#sed -e 's/^[\t]*//' newbg_space.txt > newbg.txt
+#NEWBG=$(<newbg.txt)
+
+#calc "$NEWBG * $TENTHOUSAND" > newbg_10000_space.txt
+#sed -e 's/^[\t]*//' newbg_10000_space.txt > newbg_10000.txt
+#NEWBG10000=$(<newbg_10000.txt)
+
+
+#if [[ $NEWBG10000 -gt 900000 ]] && [[ $NEWBG10000 -lt 1700000 ]]
+#then
+#calc -d "$CURRENTCARB + 1" > newcarb_space.txt
+#sed -e 's/^[\t]*//' newcarb_space.txt > newcarb.txt
+#NEWCARB=$(<newcarb.txt)
+#else
+#NEWCARB=0
+#fi
+
+
+#generating next settings file
+#echo 'Your settings' > yoursettings.txt
+#echo "Target BG: $TARGETBG" >> yoursettings.txt
+#echo "Minimum BG: $MINBG" >> yoursettings.txt
+#echo "Correct above BG: $CORRECT_ABOVE_BG" >> yoursettings.txt
+#echo "IC ratio: $ICRATIO" >> yoursettings.txt
+#echo "Correction factor: $CORRECTIONFACTOR" >> yoursettings.txt
+#echo "Reversed correction: $REVERSEDCORRECTION" >> yoursettings.txt
+#echo "Current BG: $NEWBG" >> yoursettings.txt
+#echo "Carbohydrate consumption: $CURRENTCARB" >> yoursettings.txt
+#echo "Current meal IOB: $CURRENTIOB_MEAL" >> yoursettings.txt
+#echo "Current correction IOB: $CURRENTIOB_CORRECTION" >> yoursettings.txt
+
+
+
+#pause line
+#read -p 'check your calculations, then hit #enter to clear cache'
+
+
+#V

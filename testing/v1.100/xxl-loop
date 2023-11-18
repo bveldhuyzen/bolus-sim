@@ -1,0 +1,5 @@
+for x in {1..200000}
+do . yoursettings_profile_update
+wait
+. bolus-sim-device1-calc-xxl
+done

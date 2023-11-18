@@ -1,0 +1,29 @@
+ON=$(<on.txt)
+MINBG=$(<setting2_entry_1.txt)
+TARGETBG=$(<setting1_entry_1.txt)
+CORRECT_ABOVE_BG=$(<correct_above_entry_1.txt)
+ICRATIO=$(<setting3_entry_1.txt)
+CORRECTIONFACTOR=$(<setting4_entry_1.txt)
+REVERSEDCORRECTION=$(<setting5_entry.txt)
+CURRENTBG=$(<addBG_entry_1.txt)
+CURRENTCARB=$(<addCARB_entry_1.txt)
+CURRENTIOB_MEAL=$(<addIOB_meal_entry_1.txt)
+CURRENTIOB_CORRECTION=$(<addIOB_correction_entry_1.txt)
+
+#update here
+calc -d "$CURRENTBG + 0.01" > newbg_space.txt
+sed -e 's/^[\t]*//' newbg_space.txt > newbg.txt
+NEWBG=$(<newbg.txt)
+
+#generating next yoursettings file
+echo 'Your settings' > yoursettings.txt
+echo "Target BG: $TARGETBG" >> yoursettings.txt
+echo "Minimum BG: $MINBG" >> yoursettings.txt
+echo "Correct above BG: $CORRECT_ABOVE_BG" >> yoursettings.txt
+echo "IC ratio: $ICRATIO" >> yoursettings.txt
+echo "Correction factor: $CORRECTIONFACTOR" >> yoursettings.txt
+echo "Reversed correction: $REVERSEDCORRECTION" >> yoursettings.txt
+echo "Current BG: $NEWBG" >> yoursettings.txt
+echo "Carbohydrate consumption: $CURRENTCARB" >> yoursettings.txt
+echo "Current meal IOB: $CURRENTIOB_MEAL" >> yoursettings.txt
+echo "Current correction IOB: $CURRENTIOB_CORRECTION" >> yoursettings.txt
