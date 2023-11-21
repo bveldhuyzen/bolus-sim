@@ -7,5 +7,5 @@ Correction factor: 3.2
 Reversed correction: 0
 Current BG: 3.00
 Carbohydrate consumption: 0
-Current meal IOB: 0.0
-Current correction IOB: 0.0
+Current meal IOB: 0
+Current correction IOB: 0
